@@ -1,9 +1,9 @@
 # Research state
 
 project_id: PROJECT-001
-current_experiment: null
-workflow_state: IDLE
-plan_status: not_started
+current_experiment: EXP-0001
+workflow_state: PLAN_DRAFT
+plan_status: draft
 implementation_status: not_started
 code_review_status: not_started
 execution_status: not_started
@@ -16,4 +16,4 @@ reviewed_commit: null
 reviewer_model: null
 execution_commit: null
 revision_count: 0
-next_action: configure_project
+next_action: complete_and_commit_plan
