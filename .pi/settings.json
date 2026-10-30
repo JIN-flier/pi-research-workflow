@@ -1,3 +1,6 @@
 {
-  "packages": ["npm:@quintinshaw/pi-dynamic-workflows@3.14.0"]
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-flash",
+  "defaultThinkingLevel": "low",
+  "packages": [{ "source": "npm:@quintinshaw/pi-dynamic-workflows@3.14.0", "extensions": [] }]
 }

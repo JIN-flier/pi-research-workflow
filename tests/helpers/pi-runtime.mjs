@@ -29,6 +29,9 @@ export async function loadPiRuntime(root) {
   try {
     const workflow = await import(pathToFileURL(join(packageDir, 'dist/workflow.js')).href);
     const registry = await import(pathToFileURL(join(packageDir, 'dist/agent-registry.js')).href);
-    return { ...workflow, ...registry };
+    const sdk = await import(new URL('./index.js', parentURL).href);
+    const agents = await import(pathToFileURL(join(packageDir, 'dist/agent.js')).href);
+    const ai = await import('@earendil-works/pi-ai');
+    return { ...workflow, ...registry, ...agents, sdk, ai, packageDir };
   } finally { hook.deregister(); }
 }
