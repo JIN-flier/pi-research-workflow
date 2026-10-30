@@ -1,19 +1,19 @@
 # Research state
 
 project_id: PROJECT-001
-current_experiment: EXP-0001
+current_experiment: null
 workflow_state: IDLE
-plan_status: approved
-implementation_status: committed
-code_review_status: pass
-execution_status: success
-analysis_status: complete
-approved_plan_commit: b71c3fe135362856f950392eb395963c55c8543f
-approved_plan_sha256: da7401c5b07e169ed9fa4d5e2ef137c44eee281dda0dfb78ef82a8579f52f2c3
-implementation_commit: b578aef217891d13d15697547562fdcb07d7a859
-implementation_model: "deepseek/deepseek-flash"
-reviewed_commit: b578aef217891d13d15697547562fdcb07d7a859
-reviewer_model: "deepseek/deepseek-v4-pro"
-execution_commit: b578aef217891d13d15697547562fdcb07d7a859
+plan_status: not_started
+implementation_status: not_started
+code_review_status: not_started
+execution_status: not_started
+analysis_status: not_started
+approved_plan_commit: null
+approved_plan_sha256: null
+implementation_commit: null
+implementation_model: null
+reviewed_commit: null
+reviewer_model: null
+execution_commit: null
 revision_count: 0
-next_action: form_next_hypothesis_or_stop
+next_action: configure_project

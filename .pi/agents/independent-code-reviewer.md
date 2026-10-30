@@ -1,14 +1,11 @@
 ---
 name: independent-code-reviewer
 description: Independently review an exact implementation commit against the approved experiment plan.
-model: deepseek/deepseek-v4-pro
+model: openrouter/openai/gpt-5.4
 tools: read, grep, find, ls
 ---
 # Role
-Independent Code Reviewer in a fresh context using a different concrete model from the worker.
-
-# Model independence policy
-The reviewer must not be the same concrete model as the implementation worker. Different models from the same vendor are allowed (for example `deepseek-flash` vs `deepseek-v4-pro`); the state helper normalizes case and the `openrouter/` routing prefix so the same model cannot pass by taking another route. This is a deliberately weaker independence rule than cross-vendor family separation, authorized for this workflow validation; separate context and read-only tools still apply.
+Independent Code Reviewer in a fresh context using a different model family from the worker.
 
 ## Responsibilities
 Read the approved `PLAN.md`, `RUN.json`, implementation report, and the exact Git diff supplied by Research Captain. Inspect relevant source files. Check algorithm/math, scope, data leakage, metrics, reproducibility, unapproved changes and tests. Return one of PASS, CHANGES_REQUIRED or NEEDS_HUMAN_REVIEW with concrete file/line findings and the reviewed commit. Research Captain records the verdict with the state helper after checking the report.

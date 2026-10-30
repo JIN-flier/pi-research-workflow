@@ -32,17 +32,6 @@ function fixture(runCommand = ['node', '-e', 'console.log(1)']) {
   return root;
 }
 
-function approvedImplementation(model = 'deepseek/deepseek-flash') {
-  const root = fixture();
-  submitPlan(root);
-  reviewPlan(root, 'APPROVE', 'human', 'approved at checkpoint run-independence');
-  writeFileSync(join(root, 'experiment.py'), 'print(1)\n');
-  execFileSync('git', ['-C', root, 'add', '.']);
-  execFileSync('git', ['-C', root, 'commit', '-qm', 'implementation']);
-  recordImplementation(root, model);
-  return root;
-}
-
 test('implementation is blocked before explicit approval and approval is tied to plan commit', () => {
   const root = fixture();
   submitPlan(root);
@@ -74,25 +63,11 @@ test('execution requires an independent PASS for the exact clean HEAD', () => {
   execFileSync('git', ['-C', root, 'commit', '-qm', 'implementation']);
   recordImplementation(root, 'deepseek/deepseek-flash');
   assert.throws(() => assertExecutionReady(root), /PASS review/);
-  assert.throws(() => recordReview(root, 'PASS', 'openrouter/deepseek/deepseek-flash', 'same concrete model via router'), /different concrete model/);
-  recordReview(root, 'PASS', 'deepseek/deepseek-v4-pro', 'checked changes');
+  assert.throws(() => recordReview(root, 'PASS', 'deepseek/deepseek-v4-pro', 'same family'), /different model family/);
+  recordReview(root, 'PASS', 'openrouter/openai/gpt-5.4', 'checked changes');
   assert.doesNotThrow(() => assertExecutionReady(root));
   writeFileSync(join(root, 'experiment.py'), 'print(2)\n');
   assert.throws(() => assertExecutionReady(root), /working tree/);
-});
-
-test('a different concrete model from the same vendor is an acceptable reviewer', () => {
-  const root = approvedImplementation('deepseek/deepseek-flash');
-  assert.doesNotThrow(() => recordReview(root, 'PASS', 'deepseek/deepseek-v4-pro', 'different concrete model in a fresh context'));
-  const state = readFileSync(join(root, '.research/STATE.md'), 'utf8');
-  assert.match(state, /reviewer_model: "deepseek\/deepseek-v4-pro"/);
-});
-
-test('the same concrete model is rejected through another route or different letter case', () => {
-  const root = approvedImplementation('deepseek/deepseek-flash');
-  assert.throws(() => recordReview(root, 'PASS', 'openrouter/deepseek/deepseek-flash', 'same model via router'), /different concrete model/);
-  assert.throws(() => recordReview(root, 'PASS', 'DeepSeek/DeepSeek-Flash', 'same model with different case'), /different concrete model/);
-  assert.match(readFileSync(join(root, '.research/STATE.md'), 'utf8'), /workflow_state: CODE_REVIEW/);
 });
 
 test('only two automatic revisions and each new commit needs another review', () => {
@@ -105,7 +80,7 @@ test('only two automatic revisions and each new commit needs another review', ()
     execFileSync('git', ['-C', root, 'commit', '-qm', `revision ${i}`]);
     if (i < 2) {
       recordImplementation(root, 'deepseek/deepseek-flash');
-      recordReview(root, 'CHANGES_REQUIRED', 'deepseek/deepseek-v4-pro', 'fix math');
+      recordReview(root, 'CHANGES_REQUIRED', 'openrouter/openai/gpt-5.4', 'fix math');
     }
   }
   assert.throws(() => recordImplementation(root, 'deepseek/deepseek-flash'), /revision limit/);
@@ -119,7 +94,7 @@ test('formal run records logs and execution commit, then decision closes the rou
   execFileSync('git', ['-C', root, 'add', '.']);
   execFileSync('git', ['-C', root, 'commit', '-qm', 'implementation']);
   recordImplementation(root, 'deepseek/deepseek-flash');
-  recordReview(root, 'PASS', 'deepseek/deepseek-v4-pro', 'checked changes');
+  recordReview(root, 'PASS', 'openrouter/openai/gpt-5.4', 'checked changes');
   runExperiment(root);
   assert.match(readFileSync(join(root, 'outputs/EXP-0001/stdout.log'), 'utf8'), /1/);
   assert.match(readFileSync(join(root, '.research/STATE.md'), 'utf8'), /execution_status: success/);
@@ -136,7 +111,7 @@ test('nonzero experiment exit is recorded as failure', () => {
   execFileSync('git', ['-C', root, 'add', '.']);
   execFileSync('git', ['-C', root, 'commit', '-qm', 'implementation']);
   recordImplementation(root, 'deepseek/deepseek-flash');
-  recordReview(root, 'PASS', 'deepseek/deepseek-v4-pro', 'checked changes');
+  recordReview(root, 'PASS', 'openrouter/openai/gpt-5.4', 'checked changes');
   assert.throws(() => runExperiment(root), /experiment failed/);
   assert.match(readFileSync(join(root, '.research/STATE.md'), 'utf8'), /execution_status: failed/);
   assert.match(readFileSync(join(root, 'outputs/EXP-0001/stderr.log'), 'utf8'), /failed/);

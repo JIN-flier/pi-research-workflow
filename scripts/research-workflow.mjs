@@ -51,10 +51,9 @@ function verifyPlan(root, state) {
 function codeDirty(root) {
   return git(root, 'status', '--porcelain', '--', '.', ':(exclude).research', ':(exclude)outputs');
 }
-function concreteModel(model) {
-  // Normalize the routing prefix and case so the same underlying model cannot
-  // pass the independence gate by taking another route or spelling.
-  return model.trim().toLowerCase().replace(/^openrouter\//, '');
+function family(model) {
+  const parts = model.split('/');
+  return parts[0] === 'openrouter' ? parts[1] : parts[0];
 }
 
 export function createExperiment(root, id) {
@@ -133,7 +132,7 @@ export function recordReview(root, verdict, reviewerModel, summary) {
   const state = load(root);
   requireState(state, 'CODE_REVIEW');
   if (!['PASS', 'CHANGES_REQUIRED', 'NEEDS_HUMAN_REVIEW'].includes(verdict)) throw new Error('invalid review verdict');
-  if (!reviewerModel || concreteModel(reviewerModel) === concreteModel(state.implementation_model)) throw new Error('reviewer must use a different concrete model (route prefixes are normalized)');
+  if (!reviewerModel || family(reviewerModel) === family(state.implementation_model)) throw new Error('reviewer must use a different model family');
   if (!summary?.trim()) throw new Error('review summary required');
   verifyPlan(root, state);
   if (head(root) !== state.implementation_commit || codeDirty(root)) throw new Error('implementation commit changed or working tree dirty');
