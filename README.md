@@ -1,5 +1,7 @@
 # Pi Agent research workflow (Phase 2–4)
 
+中文入门：跟随 [uv 浮点求和教学实验](docs/tutorial-uv.md)，从方案审核走到结果记录和新 Session 恢复。
+
 This repository provides project memory, five research Skills, three Pi agent types, and two gates: human plan approval and independent code review. It does **not** supply a scientific question, dataset, baseline, or automated research loop.
 
 ## Prepare

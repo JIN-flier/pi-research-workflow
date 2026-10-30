@@ -1,4 +1,4 @@
 {
-  "command": [],
-  "description": "Fill before plan review; command and plan must be committed together"
+  "command": ["uv", "run", "--locked", "--offline", "python", "src/summation_demo.py"],
+  "description": "EXP-0001 教学实验：在 uv 锁定的 Python 环境中比较朴素累加与 math.fsum；输出 JSON 到 stdout，由 runner 保存日志"
 }
