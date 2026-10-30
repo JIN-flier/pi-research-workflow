@@ -1,3 +1,3 @@
-# Research decisions
+# 研究决策
 
-Record each consequential decision with date, experiment ID, evidence files, commit, alternatives, and reason. Do not treat an unrun hypothesis as a conclusion.
+每项重要决策均需记录日期、实验 ID、证据文件、commit、备选方案和理由。不得将尚未运行的假设视为结论。

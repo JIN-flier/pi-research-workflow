@@ -1,3 +1,3 @@
-# Failures
+# 失败记录
 
-For each failed run, record the experiment ID, commit, error, logs, root cause, and next action.
+每次运行失败均需记录实验 ID、commit、错误、日志、根因和下一步行动。

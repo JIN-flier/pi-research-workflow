@@ -1,26 +1,26 @@
 ---
 name: hypothesis-design
-description: Design one falsifiable hypothesis and the smallest decisive experiment plan.
+description: 设计一个可证伪的假设，以及能够作出判断的最小实验方案。
 ---
-# Hypothesis design
+# 假设设计
 
-## Objective
-Produce one reviewable experiment that can support or falsify a specific mechanism.
+## 目标
+形成一项可供审查的实验，用于支持或证伪某个具体机制。
 
-## Required Inputs
-Project goal, related work, prior hypotheses, available data, baseline, resources and constraints.
+## 必需输入
+项目目标、相关工作、已有假设、可用数据、基线、资源与约束。
 
-## Procedure
-1. Search `HYPOTHESES.md` and rejected decisions for duplicates.
-2. State mechanism, competing explanations and a measurable falsification criterion.
-3. Specify intervention, baseline/control, data split, metrics, seed, statistical comparison, expected outcomes, cost and risks.
-4. Fill `PLAN.md` and immutable intended command in `RUN.json`; commit both and call `submit-plan`.
+## 步骤
+1. 检索 `HYPOTHESES.md` 和已否决的决策，排除重复想法。
+2. 陈述机制、竞争性解释及可测量的证伪标准。
+3. 明确干预、基线/对照、数据划分、指标、随机种子、统计比较、预期结果、成本与风险。
+4. 填写 `PLAN.md` 和 `RUN.json` 中拟执行且不可随意变更的命令；将两者提交 Git，并调用 `submit-plan`。
 
-## Output
-`.research/experiments/EXP-XXXX/PLAN.md` with the ten sections in the template and a committed `RUN.json` command.
+## 输出
+用简体中文填写 `.research/experiments/EXP-XXXX/PLAN.md` 模板的十个部分，并提交包含运行命令的 `RUN.json`。保留模板规定的英文二级标题、文件路径、命令、字段名和状态值。
 
-## Constraints
-Do not change source code or run the formal experiment. Any edit after submission invalidates approval.
+## 约束
+不得修改源代码或运行正式实验。提交审批后的任何编辑都会使批准失效。
 
-## Completion Criteria
-An independent human can approve, revise or reject the plan and its exact command without asking what will be run.
+## 完成标准
+独立的人工审查者无需追问将运行什么，就能批准、要求修改或否决方案及其准确命令。

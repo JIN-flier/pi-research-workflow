@@ -1,12 +1,12 @@
-# Project
+# 项目
 
-- Project ID: PROJECT-001
-- Scientific question: **To be supplied by the researcher.**
-- Research objective: **To be supplied by the researcher.**
-- Prior work and available code: None in this repository yet.
-- Constraints: Human approval for every experiment plan; independent code review before any formal run; preserve baselines and datasets.
-- Dataset: Not configured.
-- Python environment: Not configured. Use uv for Python projects; choose the version and dependencies for the real research task.
-- Evaluation command: Defined per experiment in committed `RUN.json`.
+- 项目 ID: PROJECT-001
+- 科学问题: **待研究者填写。**
+- 研究目标: **待研究者填写。**
+- 已有工作与可用代码: 本仓库尚未提供。
+- 约束: 每项实验方案均需人工批准；每次正式运行前必须独立代码审查；保留基线和数据集。
+- 数据集: 尚未配置。
+- Python 环境: 尚未配置。Python 项目使用 uv；按实际研究任务选择版本和依赖。
+- 评估命令: 在每轮实验已提交的 `RUN.json` 中定义。
 
-Fill this file before proposing the first hypothesis. Do not infer a scientific objective from the workflow template.
+提出首个假设前先填写本文件，包括数据来源、基线、评价指标、资源限制和风险。不得从工作流模板推断科学目标。

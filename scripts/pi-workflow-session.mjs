@@ -52,7 +52,7 @@ export function createWorkflowSessionFactory(createSession, sdk = {}) {
           if (state.workflow_state === 'READY_TO_RUN') { reopenReview(root, 'new independent reviewer session started'); state = getResearchState(root); }
           const model = `${session.model.provider}/${session.model.id}`;
           capture = captureReview(root, state, session, model);
-          args[0] += `\n\nHost audit receipt (written automatically after this session): ${capture.receiptPath}. Return exact standalone lines Verdict:, Experiment: ${state.current_experiment}, Reviewed commit: ${state.implementation_commit}, Reviewer model: ${model}, then findings/evidence/required changes. Do not write the receipt yourself.`;
+          args[0] += `\n\n宿主审计凭据（本会话结束后自动写入）：${capture.receiptPath}。依次返回准确的独立行 Verdict:、Experiment: ${state.current_experiment}、Reviewed commit: ${state.implementation_commit}、Reviewer model: ${model}，随后为 Findings:、Evidence:、Required changes:。英文标签和枚举值保持原样；说明正文必须使用简体中文。不得自行写入凭据。`;
         }
       }
       try { return await originalPrompt(...args); }

@@ -1,4 +1,4 @@
-# Research state
+# 研究状态
 
 project_id: PROJECT-001
 current_experiment: null

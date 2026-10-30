@@ -1,3 +1,3 @@
-# Literature
+# 文献
 
-Keep source citations, search dates, methods, and novelty comparison here. Separate a paper's claim from the team's inference.
+在此保存来源引用、检索日期、方法及创新性比较。区分论文主张与团队推断。

@@ -1,25 +1,25 @@
 ---
 name: research-decision
-description: Decide whether to continue, revise, abandon or defer a research direction from recorded evidence.
+description: 依据已记录证据，判断研究方向应继续、修改、放弃或暂缓。
 ---
-# Research decision
+# 研究决策
 
-## Objective
-Select a justified next research action without overstating evidence.
+## 目标
+选择有依据的下一步研究行动，不夸大证据。
 
-## Required Inputs
-Hypothesis, approved plan, code review, execution, results, prior decisions and project constraints.
+## 必需输入
+假设、已批准方案、代码审查、执行记录、结果、历史决策和项目约束。
 
-## Procedure
-1. Compare outcomes with preregistered predictions and alternatives.
-2. Choose CONTINUE, REVISE, ABANDON or INCONCLUSIVE; explain why and what evidence would change the choice.
-3. Update experiment `DECISION.md`, project `DECISIONS.md`, `HYPOTHESES.md` and `STATE.md` with the next action.
+## 步骤
+1. 将结果与预先登记的预测及替代解释进行比较。
+2. 选择 CONTINUE、REVISE、ABANDON 或 INCONCLUSIVE，解释理由及何种证据会改变该选择。
+3. 更新实验的 `DECISION.md`、项目的 `DECISIONS.md`、`HYPOTHESES.md` 和 `STATE.md`，记录下一步行动。
 
-## Output
-An experiment decision with evidence and commit links, plus updated project memory.
+## 输出
+用简体中文记录包含证据与 commit 链接的实验决策，并更新项目记忆。决策枚举、状态字段、路径和 commit 保持原样。
 
-## Constraints
-Do not relabel failed execution as a scientific negative result or recycle a rejected direction without new evidence.
+## 约束
+不得把执行失败改称科学上的否定结果；没有新证据时不得重新采用已否决的方向。
 
-## Completion Criteria
-A future session can tell what was decided, why, and which experiment supports it.
+## 完成标准
+后续会话能够明确知道作出了什么决定、为什么，以及由哪个实验支持。

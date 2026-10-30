@@ -1,3 +1,3 @@
-# Reviews
+# 审查记录
 
-Keep human plan decisions and independent review evidence here or under each experiment. Include the exact experiment ID, plan hash, and code commit.
+在此或各实验目录中保存人工方案审批决定及独立审查证据。包含准确的实验 ID、方案哈希和代码 commit。

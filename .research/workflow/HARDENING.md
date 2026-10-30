@@ -22,3 +22,14 @@
 后续获准时可运行 `node --test tests/*.test.mjs`。该套件仅使用临时项目、实际 SDK 和进程内合成响应，不调用远程模型。`tests/manual/pi-workflow-smoke.mjs` 会调用付费 DeepSeek API，属于另行显式启动的可选检查；旧日志已清理。
 
 会话凭据用于可信参与者的审计，不是操作系统沙箱或抵御恶意仓库写入者的密码学证明。
+
+## 2026-10-31 中文化回归
+
+系统提示、角色、Skill、交互提示和模板中文化后，运行 `node --test tests/*.test.mjs`：30 项中 28 项通过、2 项失败。新增的中文方案完整性和中文待填写结果检查均通过；人工审批三分支、无界面中止、只读工具策略、模型独立性和运行关卡检查通过。未调用远程或付费模型，因此此次检查不代表已验证真实模型的中文输出遵从性。
+
+修改前的基线为 28 项中 26 项通过，同样有以下两项失败，未在本次翻译中修改其实现或断言：
+
+- `tests/pi-evidence.test.mjs` 的离线传输审查凭据测试：workflow 返回 null，日志为 `Cannot read properties of undefined (reading 'map')`。
+- 同文件的 SDK 失败凭据测试：预期匹配 `review evidence`，实际在更早的关卡收到 `implementation commit changed or working tree dirty`。
+
+测试使用临时合成项目；真实项目仍为 IDLE，没有创建或执行科研实验。初次受限运行因沙箱阻止 Git 子进程（EPERM）未完成，以上结果来自获准后重新运行的离线套件。

@@ -1,6 +1,6 @@
-# Hypotheses
+# 假设
 
-| ID | Hypothesis | Falsification criterion | Status | Evidence |
+| ID | 假设 | 证伪标准 | 状态 | 证据 |
 | --- | --- | --- | --- | --- |
 
-Before creating a new hypothesis, search this table and rejected decisions for equivalent ideas.
+创建新假设前，先检索本表及已否决的决策，查找等价想法。

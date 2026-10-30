@@ -31,7 +31,7 @@ function load(root) {
 function save(root, state) {
   mkdirSync(join(root, '.research'), { recursive: true });
   const temp = `${statePath(root)}.${randomUUID()}.tmp`;
-  writeFileSync(temp, `# Research state\n\n${FIELDS.map(key => {
+  writeFileSync(temp, `# 研究状态\n\n${FIELDS.map(key => {
     const value = state[key] ?? null;
     return `${key}: ${typeof value === 'string' && /^[a-zA-Z0-9_-]+$/.test(value) ? value : JSON.stringify(value)}`;
   }).join('\n')}\n`);
@@ -63,9 +63,9 @@ export function createExperiment(root, id) {
   const dir = expDir(root, id);
   if (existsSync(dir)) throw new Error('experiment already exists');
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'PLAN.md'), '# Experiment plan\n\n## Scientific question\n\n## Hypothesis\n\n## Mechanism\n\n## Related work and novelty\n\n## Design\n\n## Baseline and controls\n\n## Metrics\n\n## Expected results\n\n## Falsification criteria\n\n## Cost and risks\n');
-  writeFileSync(join(dir, 'RUN.json'), '{\n  "command": [],\n  "description": "Fill before plan review; command and plan must be committed together"\n}\n');
-  for (const file of ['IMPLEMENTATION.md', 'CODE_REVIEW.md', 'EXECUTION.md', 'RESULTS.md', 'DECISION.md']) writeFileSync(join(dir, file), `# ${file.replace('.md', '')}\n\nPending.\n`);
+  writeFileSync(join(dir, 'PLAN.md'), '# 实验方案\n\n请用简体中文填写各部分正文。以下十个英文二级标题用于关卡校验，必须保持原样；审批前须将方案和 RUN.json 一同提交 Git。\n\n| 固定标题 | 中文含义 |\n| --- | --- |\n| Scientific question | 科学问题 |\n| Hypothesis | 假设 |\n| Mechanism | 作用机制 |\n| Related work and novelty | 相关工作与创新性 |\n| Design | 实验设计 |\n| Baseline and controls | 基线与对照 |\n| Metrics | 评价指标 |\n| Expected results | 预期结果 |\n| Falsification criteria | 证伪标准 |\n| Cost and risks | 成本与风险 |\n\n## Scientific question\n\n## Hypothesis\n\n## Mechanism\n\n## Related work and novelty\n\n## Design\n\n## Baseline and controls\n\n## Metrics\n\n## Expected results\n\n## Falsification criteria\n\n## Cost and risks\n');
+  writeFileSync(join(dir, 'RUN.json'), '{\n  "command": [],\n  "description": "方案审批前填写；命令与方案必须一同提交 Git"\n}\n');
+  for (const [file, title] of Object.entries({ 'IMPLEMENTATION.md': '实现记录', 'CODE_REVIEW.md': '代码审查', 'EXECUTION.md': '执行记录', 'RESULTS.md': '实验结果', 'DECISION.md': '实验决策' })) writeFileSync(join(dir, file), `# ${title}\n\n待填写（Pending.）\n`);
   save(root, { project_id: 'PROJECT-001', current_experiment: id, workflow_state: 'PLAN_DRAFT', plan_status: 'draft', implementation_status: 'not_started', code_review_status: 'not_started', execution_status: 'not_started', analysis_status: 'not_started', revision_count: 0, next_action: 'complete_and_commit_plan' });
 }
 
@@ -280,7 +280,7 @@ export function recordDecision(root, verdict, summary) {
   const line = `- ${new Date().toISOString()} | ${state.current_experiment} | ${verdict} | execution_commit=${state.execution_commit ?? 'none'} | ${summary}`;
   appendRecord(root, 'DECISION.md', line);
   const decisions = join(root, '.research/DECISIONS.md');
-  writeFileSync(decisions, `${existsSync(decisions) ? read(decisions) : '# Research decisions\n\n'}${line}\n`);
+  writeFileSync(decisions, `${existsSync(decisions) ? read(decisions) : '# 研究决策\n\n'}${line}\n`);
   state.workflow_state = 'IDLE'; state.analysis_status = state.execution_status === 'success' ? 'complete' : 'not_applicable';
   state.next_action = 'form_next_hypothesis_or_stop';
   save(root, state);

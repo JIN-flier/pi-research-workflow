@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync, spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { recordReview, assertExecutionReady, reopenReview, recoverRun } from '../scripts/research-workflow.mjs';
+import { recordReview, assertExecutionReady, reopenReview, recoverRun, runExperiment, recordDecision } from '../scripts/research-workflow.mjs';
 import { createHash } from 'node:crypto';
 import { implementation, evidence, ready, state } from './helpers/workflow-fixture.mjs';
 
@@ -54,6 +54,13 @@ test('a thinking suffix cannot turn the worker into an independent reviewer', ()
 test('RUN.json edits are rejected by check-run before launch', () => {
   const root = ready(); writeFileSync(join(root, '.research/experiments/EXP-0001/RUN.json'), '{"command":["false"]}');
   assert.throws(() => assertExecutionReady(root), /RUN.json changed/);
+});
+test('localized pending results cannot be mistaken for completed analysis', async () => {
+  const root = ready();
+  await runExperiment(root);
+  assert.match(readFileSync(join(root, '.research/experiments/EXP-0001/RESULTS.md'), 'utf8'), /待填写（Pending\.）/);
+  assert.throws(() => recordDecision(root, 'CONTINUE', '测试占位内容检查'), /RESULTS.md must contain analysis/);
+  assert.equal(state(root).workflow_state, 'ANALYSIS');
 });
 const cli = fileURLToPath(new URL('../scripts/research-workflow.mjs', import.meta.url));
 async function until(predicate, message, timeout = 5000) {

@@ -45,6 +45,28 @@ function approvedImplementation(model = 'deepseek/deepseek-flash') {
   return root;
 }
 
+test('localized templates remain incomplete until every protocol section is filled', () => {
+  const root = mkdtempSync(join(tmpdir(), 'research-localized-'));
+  execFileSync('git', ['init', '-q', root]);
+  execFileSync('git', ['-C', root, 'config', 'user.name', 'Test']);
+  execFileSync('git', ['-C', root, 'config', 'user.email', 'test@example.com']);
+  createExperiment(root, 'EXP-0001');
+  const path = join(root, '.research/experiments/EXP-0001/PLAN.md');
+  const template = readFileSync(path, 'utf8');
+  assert.match(template, /科学问题/);
+  assert.throws(() => submitPlan(root), /plan is incomplete: Scientific question/);
+  const headings = template.match(/^## .+$/gm);
+  assert.equal(headings.length, 10);
+  const complete = template.replace(/^(## .+)$/gm, '$1\n具体的中文方案内容。');
+  writeFileSync(path, complete.replace('## Metrics\n具体的中文方案内容。', '## Metrics'));
+  assert.throws(() => submitPlan(root), /plan is incomplete: Metrics/);
+  writeFileSync(path, complete);
+  writeFileSync(join(root, '.research/experiments/EXP-0001/RUN.json'), JSON.stringify({ command: ['node', '-e', 'console.log(1)'], description: '中文命令说明' }));
+  execFileSync('git', ['-C', root, 'add', '.']);
+  execFileSync('git', ['-C', root, 'commit', '-qm', 'localized fixture plan']);
+  assert.equal(submitPlan(root).workflow_state, 'PLAN_REVIEW');
+});
+
 test('implementation is blocked before explicit approval and approval is tied to plan commit', () => {
   const root = fixture();
   submitPlan(root);

@@ -1,25 +1,25 @@
 ---
 name: research-understanding
-description: Recover this project's current research status from memory, code and relevant evidence.
+description: 根据项目记忆、代码和相关证据，恢复当前科研状态。
 ---
-# Research understanding
+# 科研理解
 
-## Objective
-Reconstruct the current scientific question, verified findings, open uncertainties and next task.
+## 目标
+还原当前科学问题、已验证发现、未解决的不确定性及下一项任务。
 
-## Required Inputs
-`.research/PROJECT.md`, `.research/STATE.md`, relevant rows of `DECISIONS.md` and `HYPOTHESES.md`, current experiment, and only related code/failure records.
+## 必需输入
+`.research/PROJECT.md`、`.research/STATE.md`、`DECISIONS.md` 和 `HYPOTHESES.md` 中的相关条目、当前实验，以及相关代码/失败记录；不加载无关历史。
 
-## Procedure
-1. Read the two entry files; inspect the current experiment and related past decisions.
-2. Distinguish recorded evidence from assumptions. Search rejected hypotheses before suggesting directions.
-3. Identify missing project information and the stage's allowed next action.
+## 步骤
+1. 读取两个入口文件，查看当前实验及相关历史决策。
+2. 区分已记录证据与假设。提出新方向前，先检索已否决的假设。
+3. 识别缺失的项目信息，以及当前阶段允许的下一步行动。
 
-## Output
-Write `.research/RESEARCH_STATUS.md` with question, evidence, uncertainty, current state, next action and file/commit references.
+## 输出
+用简体中文编写 `.research/RESEARCH_STATUS.md`，包含问题、证据、不确定性、当前状态、下一步行动及文件/commit 引用。文件路径、状态值和 commit 保持原样。
 
-## Constraints
-Do not infer scientific results from plans; do not read all history by default; do not advance state.
+## 约束
+不得从方案推断科学结果；不得默认读取全部历史；不得推进状态。
 
-## Completion Criteria
-Another session can recover the current state and find each supporting record without the conversation history.
+## 完成标准
+另一个会话无需依赖聊天历史，即可恢复当前状态并找到每项支持记录。

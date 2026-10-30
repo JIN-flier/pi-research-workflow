@@ -1,25 +1,25 @@
 ---
 name: result-analysis
-description: Analyze completed experiment outputs against the approved plan and baselines.
+description: 依据已批准方案和基线，分析已完成实验的输出。
 ---
-# Result analysis
+# 结果分析
 
-## Objective
-Determine what the measured results support, including failures and uncertainty.
+## 目标
+判断测量结果支持什么结论，包括失败和不确定性。
 
-## Required Inputs
-Approved plan, execution record and logs, raw outputs, baseline results, metric definitions and run commit.
+## 必需输入
+已批准方案、执行记录与日志、原始输出、基线结果、指标定义和运行 commit。
 
-## Procedure
-1. Verify exit status, execution commit and data provenance.
-2. Recompute or verify metrics and compare against the predeclared baseline and falsification criterion.
-3. Examine variance, confounders, leakage, deviations and failure cases.
+## 步骤
+1. 核验退出状态、执行 commit 和数据来源。
+2. 重新计算或核验指标，与预先声明的基线和证伪标准比较。
+3. 检查方差、混杂因素、数据泄漏、偏离方案的情况及失败案例。
 
-## Output
-Write `RESULTS.md` under the experiment with tables, commands, output paths, uncertainty, limitations and direct evidence references.
+## 输出
+在实验目录用简体中文编写 `RESULTS.md`，包含表格、命令、输出路径、不确定性、局限和直接证据引用。命令、路径、指标标识和原始日志保持原样，不得翻译或改写原始证据。
 
-## Constraints
-Do not quietly change metrics or exclude failed runs. Do not infer success from exit code alone.
+## 约束
+不得悄悄修改指标或排除失败运行。不得仅凭退出码推断实验成功。
 
-## Completion Criteria
-The reported numbers can be regenerated from named outputs and the plan's metric definition.
+## 完成标准
+报告中的数值能够依据明确指定的输出和方案中的指标定义重新生成。

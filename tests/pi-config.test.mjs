@@ -12,7 +12,7 @@ const { parseWorkflowScript, runWorkflow, loadAgentRegistry, applyToolPolicy } =
 test('Pi parses the actual workflow envelope and rejects a script without metadata', () => {
   const parsed = parseWorkflowScript(source);
   assert.equal(parsed.meta.name, 'research_plan_review');
-  assert.deepEqual(parsed.meta.phases, [{ title: 'Human plan review' }]);
+  assert.deepEqual(parsed.meta.phases, [{ title: '人工方案审批' }]);
   assert.throws(() => parseWorkflowScript(parsed.body), /must be the first statement/);
 });
 

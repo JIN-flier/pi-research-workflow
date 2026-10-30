@@ -1,25 +1,25 @@
 ---
 name: literature-investigation
-description: Investigate relevant literature and compare a proposed mechanism with prior work.
+description: 调查相关文献，并将拟议机制与已有工作进行比较。
 ---
-# Literature investigation
+# 文献调查
 
-## Objective
-Establish what is known, the closest prior work, and a testable novelty claim.
+## 目标
+明确已知结论、最接近的已有工作，以及可检验的创新性主张。
 
-## Required Inputs
-Scientific question, candidate hypothesis, relevant prior decisions, search access and source documents.
+## 必需输入
+科学问题、候选假设、相关历史决策、检索渠道和原始文献。
 
-## Procedure
-1. Search primary papers with reproducible queries and dates.
-2. Read methods, data, baselines, limitations and exact claims; cross-check citations.
-3. Compare the proposed mechanism and evaluation against nearest work; mark uncertainty.
+## 步骤
+1. 使用可复现的检索式与日期检索原始论文。
+2. 阅读方法、数据、基线、局限与准确主张，并交叉核验引用。
+3. 将拟议机制及评估方式与最接近的工作比较，标明不确定性。
 
-## Output
-Write `.research/literature/RELATED_WORK.md` with citations and comparison, and `NOVELTY_ANALYSIS.md` with claims, evidence, gaps and search date.
+## 输出
+用简体中文编写 `.research/literature/RELATED_WORK.md`，包含引用和比较；编写 `NOVELTY_ANALYSIS.md`，包含主张、证据、缺口及检索日期。文献标题、原文引述和引用标识可保留原语言，配以中文说明；路径保持原样。
 
-## Constraints
-Never invent citations or claim novelty from an incomplete search. Do not turn a paper's claim into a project result.
+## 约束
+不得编造引用，不得凭不完整检索宣称创新性。不得把论文的主张写成项目已经取得的结果。
 
-## Completion Criteria
-Each comparison can be traced to a source, and the novelty claim is scoped to the searched literature.
+## 完成标准
+每项比较均可追溯至来源，创新性主张的范围限定在已检索文献内。
