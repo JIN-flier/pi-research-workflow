@@ -12,6 +12,7 @@ Read `.research/PROJECT.md`, then `.research/STATE.md`. Search `.research/DECISI
 - `.pi/agents/` contains three named agent types for `pi-dynamic-workflows`.
 - `.research/experiments/EXP-XXXX/` stores a round's plan, review, implementation, execution, results, and decision.
 - `scripts/research-workflow.mjs` enforces state and Git checks. `outputs/EXP-XXXX/` holds run logs.
+- Python research projects use uv; select the Python version and dependencies for the actual project, commit the environment configuration and lockfile, and ignore `.venv`.
 
 ## Experiment and Git rules
 
@@ -23,4 +24,4 @@ The reviewer has read-only Pi tools; the runner is instructed to use only the ga
 
 ## Missing project specifics
 
-Before the first plan, the researcher must fill scientific question, data, baseline, metrics, risks, and a real `RUN.json` command. Never fabricate results or mark the placeholder plan approved.
+Before the first plan, the researcher must fill scientific question, data, baseline, metrics, risks, and a real `RUN.json` command. When STATE.md is IDLE with no current experiment, create the experiment using the state helper's `new` command. Never fabricate results or mark the placeholder plan approved.

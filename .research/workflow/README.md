@@ -9,7 +9,7 @@ Run `node scripts/research-workflow.mjs COMMAND` from the project root. Read thi
 | Command and arguments | Required state | Result |
 | --- | --- | --- |
 | `status` | Any | Print STATE.md without changing it |
-| `new EXP-0002` | IDLE | Create templates and enter PLAN_DRAFT |
+| `new EXP-0001` | IDLE | Create the first experiment's templates and enter PLAN_DRAFT; use an unused ID for later rounds |
 | `submit-plan` | PLAN_DRAFT | Check committed PLAN.md/RUN.json and enter PLAN_REVIEW |
 | `record-plan-review DECISION human "checkpoint RUN_ID: reason"` | PLAN_REVIEW | Record the actual APPROVE, REVISE or REJECT response |
 | `record-implementation MODEL` | PLAN_APPROVED or IMPLEMENTATION_REVISION | Check the approved plan and clean code commit; enter CODE_REVIEW |
