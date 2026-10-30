@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-0001",
+  "description": "Fixed 3-epoch MLP baseline vs CNN on the fixed 55k/5k MNIST split; select by final validation accuracy, then a single final test phase.",
+  "seed": 42,
+  "epochs": 3,
+  "batch_size": 128,
+  "threads": 2,
+  "deterministic": true,
+  "optimizer": {
+    "name": "adam",
+    "lr": 0.001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0
+  },
+  "loss": "cross_entropy",
+  "split": {
+    "seed": 42,
+    "total_train_size": 60000,
+    "train_size": 55000,
+    "val_size": 5000
+  },
+  "normalization": {
+    "mean": 0.1307,
+    "std": 0.3081
+  },
+  "augmentation": "none",
+  "num_workers": 0,
+  "models": [
+    "mlp",
+    "cnn"
+  ],
+  "max_parameters_per_model": 100000,
+  "test_evaluation_stage": 1,
+  "selection": "final_validation_accuracy_ties_fewer_parameters",
+  "data_dir": "data"
+}
