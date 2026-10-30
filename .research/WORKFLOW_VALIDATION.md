@@ -79,11 +79,11 @@
 **真实缺陷，不得淡化**
 
 - 事件日志显示该 reviewer 实际成功调用了 `bash`，执行了 Git 检查等命令；角色声明只允许 `read,grep,find,ls`，但实际能力更宽。
-- Captain 最初把报告中的 `git show`/`git diff`/`git status` 误解释为“没有实际使用工具的证据瑕疵”，该说法已被外层纠正：reviewer **确实拥有并使用** `bash`。原始报告保留不改，更正写入 [FAIL-0001](../failures/FAIL-0001-reviewer-tool-policy.md) 和 [CODE_REVIEW.md](./experiments/EXP-0001/CODE_REVIEW.md)。
+- Captain 最初把报告中的 `git show`/`git diff`/`git status` 误解释为“没有实际使用工具的证据瑕疵”，该说法已被外层纠正：reviewer **确实拥有并使用** `bash`。原始报告保留不改，更正写入 [FAIL-0001](./failures/FAIL-0001-reviewer-tool-policy.md) 和 [CODE_REVIEW.md](./experiments/EXP-0001/CODE_REVIEW.md)。
 - 根因（源码检查）：插件 `src/agent.ts` 把 `applyToolPolicy` 过滤后的工具作为 `customTools` 传给 Pi 1.4 SDK，但未把角色 allowlist 应用到控制最终活动工具集的 SDK `tools`/`noTools` 选项；Pi 1.4 的 `customTools` 是追加工具，不排除默认内置工具。现有 14 个测试只测过滤结果，没有测真实 SDK 子会话的最终工具集。
 - **该插件缺陷未修复**。本轮没有全局 patch 包，也没有宣称已修复。
 
-**证据**：[04-review.input.md](../outputs/workflow-validation/04-review.input.md)、[04-review.output.md](../outputs/workflow-validation/04-review.output.md)、[04-review.events.jsonl](../outputs/workflow-validation/04-review.events.jsonl)、[FAIL-0001](../failures/FAIL-0001-reviewer-tool-policy.md)、session `01a18d18-db0a-752e-bad8-88639bf5752c`。
+**证据**：[04-review.input.md](../outputs/workflow-validation/04-review.input.md)、[04-review.output.md](../outputs/workflow-validation/04-review.output.md)、[04-review.events.jsonl](../outputs/workflow-validation/04-review.events.jsonl)、[FAIL-0001](./failures/FAIL-0001-reviewer-tool-policy.md)、session `01a18d18-db0a-752e-bad8-88639bf5752c`。
 
 ## 5. 阶段 05 — 严格只读 CLI 补充审查（containment，不是修复）
 
