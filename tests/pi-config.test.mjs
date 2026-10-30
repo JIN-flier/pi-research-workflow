@@ -2,38 +2,56 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
+import { loadPiRuntime } from './helpers/pi-runtime.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
-const read = path => readFileSync(join(root, path), 'utf8');
+const root = fileURLToPath(new URL('..', import.meta.url));
+const source = readFileSync(join(root, '.pi/workflows/plan-review.workflow.js'), 'utf8');
+const { parseWorkflowScript, runWorkflow, loadAgentRegistry, applyToolPolicy } = await loadPiRuntime(root);
 
-test('project agent definitions name three roles and reviewer has no mutation tools', () => {
-  const names = ['experiment-runner', 'implementation-worker', 'independent-code-reviewer'];
-  for (const name of names) assert.match(read(`.pi/agents/${name}.md`), new RegExp(`^name: ${name}$`, 'm'));
-  const reviewer = read('.pi/agents/independent-code-reviewer.md');
-  assert.match(reviewer, /^tools: read, grep, find, ls$/m);
-  assert.match(reviewer, /^model: openrouter\/openai\/gpt-5\.4$/m);
+test('Pi parses the actual workflow envelope and rejects a script without metadata', () => {
+  const parsed = parseWorkflowScript(source);
+  assert.equal(parsed.meta.name, 'research_plan_review');
+  assert.deepEqual(parsed.meta.phases, [{ title: 'Human plan review' }]);
+  assert.throws(() => parseWorkflowScript(parsed.body), /must be the first statement/);
 });
 
-test('plan checkpoint aborts headless and maps two explicit confirmations to three outcomes', async () => {
-  const source = read('.pi/workflows/plan-review.workflow.js');
-  async function run(replies) {
-    const calls = [];
-    const context = {
-      args: { experimentId: 'EXP-0001', planCommit: 'abc123', planSha256: 'hash123' },
-      phase: () => {},
-      checkpoint: async (prompt, options) => {
-        calls.push(options);
-        if (!replies.length) throw new Error('no human input');
+test('Pi discovers project roles and filters reviewer tools to read only', () => {
+  const registry = loadAgentRegistry(root, { userDir: '/nonexistent', legacyUserDir: '/nonexistent' });
+  for (const name of ['experiment-runner', 'implementation-worker', 'independent-code-reviewer']) assert.ok(registry.has(name));
+  const reviewer = registry.get('independent-code-reviewer');
+  const tools = ['read', 'grep', 'find', 'ls', 'bash', 'edit', 'write'].map(name => ({ name }));
+  assert.deepEqual(applyToolPolicy(tools, reviewer.tools, reviewer.disallowedTools).map(tool => tool.name), ['read', 'grep', 'find', 'ls']);
+  assert.ok(reviewer.model, 'Reviewer must bind a model; availability and independence are checked at dispatch/review');
+});
+
+const options = () => ({
+  cwd: root,
+  args: { experimentId: 'EXP-TEST', planCommit: 'abc123', planSha256: 'hash123' },
+  persistLogs: false,
+  agentRegistry: new Map(),
+});
+
+for (const [decision, answers] of [['APPROVE', [true]], ['REJECT', [false, true]], ['REVISE', [false, false]]]) {
+  test(`real Pi runtime returns ${decision} only from the supplied confirmations`, async () => {
+    const replies = [...answers];
+    let calls = 0;
+    const result = await runWorkflow(source, {
+      ...options(),
+      confirm: async (_prompt, settings) => {
+        calls++;
+        assert.equal(settings.headless, 'abort');
+        assert.equal(settings.default, false);
+        assert.equal(settings.kind, 'confirm');
         return replies.shift();
       },
-    };
-    const result = await vm.runInNewContext(`(async () => { ${source} })()`, context);
-    assert.ok(calls.every(x => x.headless === 'abort' && x.default === false));
-    return result.decision;
-  }
-  assert.equal(await run([true]), 'APPROVE');
-  assert.equal(await run([false, true]), 'REJECT');
-  assert.equal(await run([false, false]), 'REVISE');
-  await assert.rejects(run([]), /no human input/);
+    });
+    assert.equal(calls, answers.length);
+    assert.equal(result.result.decision, decision);
+    assert.equal(result.result.planCommit, 'abc123');
+  });
+}
+
+test('real Pi runtime aborts the plan gate without a human confirmation channel', async () => {
+  await assert.rejects(runWorkflow(source, options()), error => error.code === 'WORKFLOW_ABORTED' && /headless/.test(error.message));
 });

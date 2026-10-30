@@ -1,3 +1,9 @@
+export const meta = {
+  name: 'research_plan_review',
+  description: 'Human review of an exact experiment plan and version',
+  phases: [{ title: 'Human plan review' }],
+};
+
 // Use as the `script` of Pi's workflow tool with background: false.
 // Supply args: { experimentId, planCommit, planSha256 } from STATE.md.
 if (!args?.experimentId || !args?.planCommit || !args?.planSha256) throw new Error('experiment ID, plan commit and hash required');
