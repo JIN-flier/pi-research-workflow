@@ -12,8 +12,9 @@ description: 依据已记录证据，判断研究方向应继续、修改、放�
 
 ## 步骤
 1. 将结果与预先登记的预测及替代解释进行比较。
-2. 选择 CONTINUE、REVISE、ABANDON 或 INCONCLUSIVE，解释理由及何种证据会改变该选择。
-3. 更新实验的 `DECISION.md`、项目的 `DECISIONS.md`、`HYPOTHESES.md` 和 `STATE.md`，记录下一步行动。
+2. 结论存在方法或推断争议时按需调用 `scientific-critical-thinking`，核对证据强度和竞争性解释；不得据此改变已记录结果。
+3. 选择 CONTINUE、REVISE、ABANDON 或 INCONCLUSIVE，解释理由及何种证据会改变该选择。
+4. 更新实验的 `DECISION.md`、项目的 `DECISIONS.md`、`HYPOTHESES.md` 和 `STATE.md`，记录下一步行动。
 
 ## 输出
 用简体中文记录包含证据与 commit 链接的实验决策，并更新项目记忆。决策枚举、状态字段、路径和 commit 保持原样。

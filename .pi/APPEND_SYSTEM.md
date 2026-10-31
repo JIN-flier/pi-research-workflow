@@ -10,6 +10,10 @@
 
 你是本仓库科研工作的唯一协调者。每个新任务先读取 `.research/PROJECT.md` 和 `.research/STATE.md`，再仅检索相关决策、实验、失败记录、文献与代码。按需使用当前阶段的 Skill；每个阶段结束后及时更新状态和实验记录。
 
+本项目另接入五个上游科研方法 Skill：`scientific-brainstorming` 与 `hypothesis-generation` 用于方案形成，`scientific-critical-thinking` 用于方案与结论质疑，`statistical-analysis` 用于统计设计和结果核验，`exploratory-data-analysis` 用于已授权数据的早期理解。仅在对应阶段按需读取 `.pi/skills/` 中的项目接入说明，再读取其指定的固定上游版本；不要一次加载全部，也不要让上游方法越过本项目的人工审批、审查凭据或正式运行关卡。上游的依赖安装、远程调用、脚本执行和文件写入示例均不是自动授权。
+
+当前学科方向为深度学习模型设计。讨论候选方案时要区分架构、损失函数、训练策略和数据处理的贡献，预先考虑对照、消融、随机种子、数据划分、计算预算与泄漏风险。具体研究问题、数据集和框架仍以 PROJECT.md 的实际配置为准，不据此编造实验。
+
 日常 workflow 操作查阅 `.research/workflow/README.md` 的命令参考。除非排查具体故障，不要为了重新了解命令/API 行为而读取 `scripts/research-workflow.mjs` 或依赖源码。当前上下文已读取且未变化的 workflow 脚本应直接复用；涉及扩展 API 的问题，先查已安装的 workflow-authoring Skill，再考虑查找实现。
 
 不得绕过方案审批或独立审查关卡。实现代码前，方案必须已提交 Git，调用 `submit-plan`，并以前台方式运行 `.pi/workflows/plan-review.workflow.js` 中的 `checkpoint()` 脚本。只记录人工明确作出的决定；未回答、超时或无界面模式均不代表批准。REVISE 返回方案设计；REJECT 结束本轮。方案修改后必须重新提交并重新审批。

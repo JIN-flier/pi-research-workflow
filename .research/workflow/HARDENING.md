@@ -33,3 +33,9 @@
 - 同文件的 SDK 失败凭据测试：预期匹配 `review evidence`，实际在更早的关卡收到 `implementation commit changed or working tree dirty`。
 
 测试使用临时合成项目；真实项目仍为 IDLE，没有创建或执行科研实验。初次受限运行因沙箱阻止 Git 子进程（EPERM）未完成，以上结果来自获准后重新运行的离线套件。
+
+## 2026-10-31 科研 Skill 接入回归
+
+从 K-Dense Scientific Agent Skills 的固定 commit `5f2bc0341354fd5590aef76a533ada1e1e5b4e62` 选择五个通用 Skill，以项目阶段适配层接入；源文件和配套资料在 `.pi/vendor/scientific-agent-skills/`，项目入口在 `.pi/skills/`。只修改提示与项目研究方向，不更改状态脚本、审批脚本、审查脚本或角色工具策略。真实任务尚未配置，不执行上游脚本、安装统计依赖或启动正式实验。
+
+离线命令 `node --test tests/*.test.mjs` 结果为 31 项中 29 项通过、2 项失败。新增的 Pi Skill 发现测试通过：五个原有阶段 Skill 和五个新增适配层被发现，无诊断；上游资料目录未被当作自动加载 Skill。方案审批三分支、只读审查工具与运行状态关卡测试通过。失败仍是上节记录的两项 `tests/pi-evidence.test.mjs`，错误内容未变；因此不能宣称完整审查凭据链路已通过回归。未调用付费模型，中文输出与方法质量尚未在真实模型上验证。

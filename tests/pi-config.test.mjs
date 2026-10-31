@@ -7,7 +7,18 @@ import { loadPiRuntime } from './helpers/pi-runtime.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const source = readFileSync(join(root, '.pi/workflows/plan-review.workflow.js'), 'utf8');
-const { parseWorkflowScript, runWorkflow, loadAgentRegistry, applyToolPolicy } = await loadPiRuntime(root);
+const { parseWorkflowScript, runWorkflow, loadAgentRegistry, applyToolPolicy, sdk } = await loadPiRuntime(root);
+
+test('Pi discovers the five research adapters alongside the original skills without loading the vendor tree as skills', () => {
+  const loaded = sdk.loadSkillsFromDir({ dir: join(root, '.pi/skills'), source: 'project' });
+  assert.deepEqual(loaded.diagnostics, []);
+  assert.deepEqual(loaded.skills.map(skill => skill.name).sort(), [
+    'exploratory-data-analysis', 'hypothesis-design', 'hypothesis-generation',
+    'literature-investigation', 'research-decision', 'research-understanding',
+    'result-analysis', 'scientific-brainstorming',
+    'scientific-critical-thinking', 'statistical-analysis',
+  ]);
+});
 
 test('Pi parses the actual workflow envelope and rejects a script without metadata', () => {
   const parsed = parseWorkflowScript(source);
