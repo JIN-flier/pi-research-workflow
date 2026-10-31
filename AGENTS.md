@@ -13,7 +13,8 @@
 ## 环境与目录
 
 - 当前环境提供 Pi 1.4.0 和 Node.js 24。
-- `.pi/agents/` 包含供 `pi-dynamic-workflows` 使用的三种具名代理类型。
+- `.pi/agents/` 包含供 `pi-dynamic-workflows` 使用的四种具名代理类型；研究审计员与代码审查员分别捕获凭据。
+- 方法入口为 `.pi/skills/aris-*/`，固定上游在 `.pi/vendor/aris/`。使用前读取 `.pi/aris/ADAPTER.md` 并通过转接器检查阶段与能力；上游脚本和工具声明不授予执行权限。DeepSeek Flash/Pro 研究审计记录 `same-family / provisional`，不冒称 ARIS 跨家族接受。
 - `.research/experiments/EXP-XXXX/` 保存每轮的方案、审查、实现、执行、结果和决策。
 - `scripts/research-workflow.mjs` 强制执行状态与 Git 检查。`outputs/EXP-XXXX/` 保存运行日志。
 - Python 科研项目使用 uv；按实际项目选择 Python 版本与依赖，提交环境配置和锁文件，并忽略 `.venv`。

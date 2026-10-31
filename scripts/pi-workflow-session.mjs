@@ -4,6 +4,8 @@ import { captureReview, REVIEW_TOOLS } from './review-evidence.mjs';
 import { getResearchState, reopenReview } from './research-workflow.mjs';
 import { rolePolicy } from './research-roles.mjs';
 import { concreteModel } from './review-evidence.mjs';
+import { captureAudit } from './aris-audit-evidence.mjs';
+import { verifyInvocation } from './aris-adapter.mjs';
 
 // Pi 1.4 treats customTools as additions. Restrict the initial SDK selection,
 // then enforce the repository role before prompting (including store tools
@@ -32,11 +34,11 @@ export function createWorkflowSessionFactory(createSession, sdk = {}) {
     session.bindExtensions = async (...args) => { await originalBind(...args); check(); };
     const originalPrompt = session.prompt.bind(session);
     session.prompt = async (...args) => {
-      const role = String(args[0]).match(/^Research role: (implementation-worker|independent-code-reviewer|experiment-runner)\s*$/m)?.[1];
+      const role = String(args[0]).match(/^Research role: (implementation-worker|independent-code-reviewer|experiment-runner|independent-research-auditor)\s*$/m)?.[1];
       let policy;
       if (role) {
         policy = rolePolicy(options.cwd, role);
-        if (role === 'independent-code-reviewer' && (policy.tools.length !== REVIEW_TOOLS.length || REVIEW_TOOLS.some(t => !policy.tools.includes(t)))) throw new Error('reviewer policy must contain exactly the four read-only tools');
+        if (['independent-code-reviewer', 'independent-research-auditor'].includes(role) && (policy.tools.length !== REVIEW_TOOLS.length || REVIEW_TOOLS.some(t => !policy.tools.includes(t)))) throw new Error('reviewer policy must contain exactly the four read-only tools');
         if (concreteModel(`${session.model?.provider}/${session.model?.id}`) !== concreteModel(policy.model)) throw new Error(`research role ${role} model mismatch`);
         if (options.thinkingLevel !== policy.thinking || session.thinkingLevel !== policy.thinking) throw new Error(`research role ${role} thinking mismatch: requested ${options.thinkingLevel}, effective ${session.thinkingLevel}, policy ${policy.thinking}`);
         tools = policy.tools;
@@ -46,6 +48,18 @@ export function createWorkflowSessionFactory(createSession, sdk = {}) {
       audit(role ?? null);
       let capture;
       const root = options.cwd;
+      const dispatchPath = String(args[0]).match(/^ARIS dispatch: (.+)$/m)?.[1];
+      if (dispatchPath) {
+        const { invocation } = verifyInvocation(root, dispatchPath);
+        if (invocation.status !== 'prepared' || invocation.role !== role || !['implementation-worker', 'experiment-runner'].includes(role)) throw new Error('ARIS 交接阶段或角色不匹配');
+      }
+      if (role === 'independent-research-auditor') {
+        const invocationPath = String(args[0]).match(/^ARIS invocation: (.+)$/m)?.[1];
+        const slot = String(args[0]).match(/^ARIS audit slot: (attack|review)$/m)?.[1];
+        if (!invocationPath || !slot) throw new Error('研究审计缺少调用路径或槽位');
+        capture = captureAudit(root, invocationPath, slot, session, options.thinkingLevel);
+        args[0] += capture.prompt;
+      }
       if (role === 'independent-code-reviewer' && tools.length === REVIEW_TOOLS.length && REVIEW_TOOLS.every(t => tools.includes(t)) && existsSync(join(root, '.research/STATE.md'))) {
         let state = getResearchState(root);
         if (['CODE_REVIEW', 'READY_TO_RUN'].includes(state.workflow_state)) {
@@ -55,7 +69,7 @@ export function createWorkflowSessionFactory(createSession, sdk = {}) {
           args[0] += `\n\n宿主审计凭据（本会话结束后自动写入）：${capture.receiptPath}。依次返回准确的独立行 Verdict:、Experiment: ${state.current_experiment}、Reviewed commit: ${state.implementation_commit}、Reviewer model: ${model}，随后为 Findings:、Evidence:、Required changes:。英文标签和枚举值保持原样；说明正文必须使用简体中文。不得自行写入凭据。`;
         }
       }
-      try { return await originalPrompt(...args); }
+      try { const result = await originalPrompt(...args); capture?.finished?.(); return result; }
       catch (error) { capture?.failed(); throw error; }
     };
     return result;

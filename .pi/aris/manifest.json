@@ -1,0 +1,2296 @@
+{
+  "version": 1,
+  "upstream": {
+    "repository": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+    "commit": "9a4f093dcf6fd7cd37ac2f2e79e9a0a7af05a492",
+    "retrievedAt": "2026-10-31",
+    "license": "MIT",
+    "hashes": {
+      "LICENSE": "e30cf5dd5f49b4f9b656590e23d782b4756c924a9f0ff0162b3e7b5d87006bf5",
+      "skills/ablation-planner/SKILL.md": "ce51bfff265e5f0a6e8fd03333bfa8dee679e728e0d325830988ca5bd31307da",
+      "skills/alphaxiv/SKILL.md": "f313e596afbfc7e88a10def82c9438d0715942cc4e945480a27c809b099c3585",
+      "skills/analyze-results/SKILL.md": "2b97b8ae1a279ac8a7db14e7d7bea67934c88352d55c95e20fcfb681a8640930",
+      "skills/arxiv/SKILL.md": "474be36fb19d0dd99ddc8c6fa2d684836a45dca9d02051d98b5c79ac979307ed",
+      "skills/citation-audit/SKILL.md": "8b6264f06c8b5d5889651bd059301bb4e8e5efd29565d8dd1740e3d5e21c6159",
+      "skills/citation-crosscheck/SKILL.md": "8556f29c677b93d465df6b7309914e0b1c387213f73d132b5182fa4d0af42758",
+      "skills/citation-crosscheck/scripts/cx_verify.py": "ae731cb5bfbc26bfa12f007516e4b0b8591c9384d4512d1d5c4d74737d3f250f",
+      "skills/comm-lit-review/SKILL.md": "9fefbc15dae68a19176f6d7e78c348979a23b2a2363291b7ef81081c6dfb770d",
+      "skills/deepxiv/SKILL.md": "48a6b4cc7a5ba9e77b5287607c25e15094475dd238c625660c854e81405b115e",
+      "skills/exa-search/SKILL.md": "c9ffd1e95004f591d6bc17e1a5bf16864f0c0230f446d60c6fc2b3890afb71de",
+      "skills/experiment-audit/SKILL.md": "6a8b6817a30e1bef03ad2bd679155ce39c2b0977bca38874485f7f5c1fd2567c",
+      "skills/experiment-plan/SKILL.md": "c5b53692ff95b0b55e80702e33afc79d9fe8d4f55a69e2a39714013f97ac595e",
+      "skills/experiment-queue/SKILL.md": "6da32285f905d77664334bba7f7bbc2c069814ff5c3bc266ecc00f6c77d77208",
+      "skills/experiment-queue/scripts/build_manifest.py": "2fe0d13d2bba863e9bbde65f8a746f1c0f46b7e2c08e16107786fad6980a5820",
+      "skills/experiment-queue/scripts/queue_manager.py": "9b53e554bda3fec88d9d293e323e26f531d8c074b7544a8ca7b4c3b529ab0129",
+      "skills/firecrawl-search/SKILL.md": "927f66090591c44daa6da6cc3cf7547bd8a305aba02694fb9ecbc4046dcfe19a",
+      "skills/formula-derivation/SKILL.md": "c428e321dd2df66aff35475ed7b56e0924db596b3ec94e6819abe72c7c9a4e4c",
+      "skills/gemini-search/SKILL.md": "bbb17bca28a0db85f3a26fe9b4109bcaae5709843f4e58df985e257eb1c8d5f3",
+      "skills/idea-creator/SKILL.md": "4752ae46d1a67c181838f0dbe15812e36d384751b1e5c9e3d7b8abb608cb58b2",
+      "skills/integrity-forensics/SKILL.md": "33cdf3f4fd2a8dea073a73e2cba870576c576b1d201efa3d0a4bde2e7e7256ed",
+      "skills/keenable-search/SKILL.md": "c37659e338982b7f4559df21734d4140cfae5199a69a9a2a2ac13d48660bd780",
+      "skills/kill-argument/SKILL.md": "96a106531c294c17b5b136009b04ecf96f85633e6e1339c5c2868ee1c40486ff",
+      "skills/monitor-experiment/SKILL.md": "0527977308bb7b26139ffb56cd2d45ecc72a9dd2961073ad51fac4aac106961d",
+      "skills/novelty-check/SKILL.md": "a1f257297405c9948f570d51672f50b0176177001e74118c926b149c9ccb9af4",
+      "skills/openalex/SKILL.md": "6911236401c787abf43df44f95baf35185137e7e9bad362f0142630af8e736ff",
+      "skills/paper-claim-audit/SKILL.md": "3cf3ecdf14899aa011c7f5baf5efcba7a67e940a65e7938170426f4af2b032ea",
+      "skills/proof-checker/SKILL.md": "36b0d62ed059b489db549c7e96d51c5bc4a1cf11a9c7061405e05be8eba75b1f",
+      "skills/qzcli/SKILL.md": "328953e6e4a21f8a38e979f9729818721af387724b799cb7cc96e072d0012d2f",
+      "skills/research-implement-feature/SKILL.md": "a20e019ace930eb62cd23a8924f754de686bdcfa1f03ffa24cee8d220ffe2fc6",
+      "skills/research-lit/SKILL.md": "3800da1ad62b7d04f9e2b9e2868a3670bff1e47c0542d80b98a8fa9445ec7f79",
+      "skills/research-refine/SKILL.md": "c58649772c1cca2fc3e9d32622be279b42491991ab96301b30acb3722b45af6b",
+      "skills/research-review/SKILL.md": "71982b92a7790229076204d7b7264bf5d31e9053169ec140ca0c6cca849ab7ab",
+      "skills/result-to-claim/SKILL.md": "b12d10bdb51440f65e4112e6643712f172a7e37c1e15066e15d81eaee5838a8f",
+      "skills/run-experiment/SKILL.md": "4d481ce95d8bcadb93b095c3dd9bda51d68b6edea6b710316d6c0c74bb5bcfa8",
+      "skills/semantic-scholar/SKILL.md": "41be9cd7d08d2d795d4fe0c87d23288712febd2807b8d4d38a2ea9c54ebb31e8",
+      "skills/serverless-modal/SKILL.md": "e8444d7c5e4cb53f400602a96bf9fbb8c682b85ffda8c24bcceb19cc3337e31f",
+      "skills/shared-references/acceptance-gate.md": "acfe2e790d97445396ff4eb605b91e4de756082d617b89cf9278bff76dc25623",
+      "skills/shared-references/assurance-contract.md": "4320cc8f8614f95914a1b8594759a8e0264f9e8ba02b7dca8305acab0c43b282",
+      "skills/shared-references/capture-antipatterns.md": "419b914ade074842b815bff5133c18993a31305ca36e40b08918856777857378",
+      "skills/shared-references/citation-discipline.md": "01fc1cf751d7e0e6bef04897df6ef1bcf1e1b20e5b56d9f208e020cc48ba6725",
+      "skills/shared-references/compute-env-contract.md": "293606bcf6281712e0f5e1a05be9b67e001f2e5b567e2a956e2099de9c648974",
+      "skills/shared-references/effort-contract.md": "c1cb84a099d7d465ce71e0fc6c8fe7449c8273072b4cb977e0e58744d767f482",
+      "skills/shared-references/evidence-precheck.md": "919a437a2e4a618ff6bcac6c03b7ec12bde3fef33d1a2aea25c9d98fcbd5e2d2",
+      "skills/shared-references/experiment-integrity.md": "22150fbdc5867e7790c88f968bccb367079c2db4c190ddce980709aea7e76f60",
+      "skills/shared-references/external-cadence.md": "d0d8e92c9c8f5e60555c8ddf32cf15c78d0bdc61a367ef35d8b0fef8dab906f3",
+      "skills/shared-references/fan-out-pattern.md": "e7322641c88b77e62d9cc2848cea0e99600492744fe65453d51abbb099255068",
+      "skills/shared-references/injection-hygiene.md": "80295bfe5d6389890464529b41d47cb1a9ffb4d571b558b6226ef39ace9f0440",
+      "skills/shared-references/integration-contract.md": "2a182e6ab3cd8e035b92874bcd8173b421ed6d403b280b3df3a49fa5d488e0f3",
+      "skills/shared-references/output-composition.md": "8de81708431091a21a641be5f91db7958bb9f9a4b85d4fe03f52c5b496948651",
+      "skills/shared-references/output-language.md": "7b326400dca5130ce4beedf72fc2010680afe96eb56a6ab21210d323adc9a52e",
+      "skills/shared-references/output-manifest.md": "28e29bc8e53c52afe4eeeb590df8893282a3bbced08e105e154ad228b6cd1922",
+      "skills/shared-references/output-versioning.md": "73a4269b537be728b0ecc35789f11fa6d1fafa6d0430d07ad2738f064b1e4da3",
+      "skills/shared-references/resumable-runs.md": "bf522bfed126b0db96dfb22ab84f0011ba6f79bedc4f6a28a3a40f67500abb61",
+      "skills/shared-references/review-scope-limits.md": "e383dbaa57aed6f8fd2c2bb6bcaefc6806648126d11b21cb6c39eeeec76100f6",
+      "skills/shared-references/review-tracing.md": "fcf521283ee275708ca6f1a34ad836ca7e9c913f69e49fdd735a13d6f3ad964d",
+      "skills/shared-references/reviewer-backends.md": "e0aea16315faaec6ea468272aed7bf9d4a1b1d5261302a8ba357a9dce7bd9c33",
+      "skills/shared-references/reviewer-independence.md": "fbbfcb6e7ff53010b596e8e01ce456d1906734f5bd198745f76ccd62787af3e3",
+      "skills/shared-references/reviewer-routing.md": "9668f548d6ed5ecbbf3d9f350e370dfc6623ad0567e9e7050ccc01b69d3b29d1",
+      "skills/shared-references/skill-governance.md": "2da8e745ce5dc511206ab3a6a378a26d3bc6e4ca035c1f763f7a0b1793155c73",
+      "skills/shared-references/taste-calibration.md": "245e12a52b6c013022ddbcd8c682e4e5290bda6e38ecc6f14d7b2eaeb2988af8",
+      "skills/shared-references/venue-checklists.md": "712396be66d4db85f0038c5ff5479a5fc66db03bc7175c8ed931f7284802f4e2",
+      "skills/shared-references/wiki-helper-resolution.md": "0f4f408e97ed06f9d6d9775d9a1eb4008f6a76b8e728fe05321cca44a593529a",
+      "skills/shared-references/writing-principles.md": "25c71f6b76fad1a198b47b4eae9b1d101561578cc0a8767e91706957829f0abe",
+      "skills/system-profile/SKILL.md": "9d31e32d2a63cf2f27a843e171c652327596c3f9e911c265660618d4ba27c48e",
+      "skills/training-check/SKILL.md": "d7330941a9c178b0681d32675cbff1187517dee807f3ad2f7c7dad175953df6e",
+      "skills/vast-gpu/SKILL.md": "69aabce36540fd6fce55bf47b6f043166fc118fd708d03efddb57d168a99f4e5",
+      "skills/web-debug-search/SKILL.md": "ffb5f3ccf61c45d90c41901c251263f945c67baba0f91cb300cc1d53dcd63d01",
+      "templates/EXPERIMENT_LOG_TEMPLATE.md": "32126068df3cf2168d0a7d24f8658d7e97890df506155746dbe570302f12b59f",
+      "templates/EXPERIMENT_PLAN_TEMPLATE.md": "a28f0795f4c8e203216be6b5d91b4d9def60f5af7cdbfcc7ed0a2ebf205abb67",
+      "templates/EXPERIMENT_PLAN_TEMPLATE_CN.md": "bec2b65c78f95902040bc7a2f2a728be42c82a8d0242a9c265602400e29da34f",
+      "templates/FINDINGS_TEMPLATE.md": "c3d98f53f780a5c91988d785e6cbb118c9e2b6d1ac819db8943639e17d55255f",
+      "templates/IDEA_CANDIDATES_TEMPLATE.md": "832bf7ac924894982cf73fae8f2d026b76111cf952f14f6ca3e3b130ee14e984",
+      "templates/IDEA_CANDIDATES_TEMPLATE_CN.md": "b57f0086f8fcbe9159aa611ad866c39fcc5faf3149d75529e02bc7cbd06a8fbf",
+      "templates/MANIFEST_TEMPLATE.md": "513bc08b2744b20825bb00063e77e22d536293e428fb419ca0c7b0ed9f7ea6d2",
+      "templates/NARRATIVE_REPORT_TEMPLATE.md": "108481c051e96976b432f038c3903968d89d9d3556cc6bbef45c3947198713b6",
+      "templates/RESEARCH_BRIEF_TEMPLATE.md": "f3aae6dcb26028a4115994aeb5a37b3fe408aa6cca18743bac693cfc1ad08688",
+      "templates/RESEARCH_BRIEF_TEMPLATE_CN.md": "4e341cc84147061bc67a1fa15379b54ba3ea11e1ad0917150333471686b2d4dc",
+      "templates/RESEARCH_CONTRACT_TEMPLATE.md": "e71ee594951a50aaa93b1644318c28a705d6fcf9780ca1f61030b1c1bb44696a",
+      "tools/arxiv_fetch.py": "30446596ca9aeb66a0a2f20fc0919d5f473fbee34dd611fee5c3613fadf5e7fa",
+      "tools/capture_filter.py": "04cf93f079612fa1454e424101cef3069bb29c79dad11488e659b40bb1c118d0",
+      "tools/copilot_native_evidence.py": "f8137fccba9874b7d04e0ddbbee5755d2d036509415680da760910959d7aff02",
+      "tools/deepxiv_fetch.py": "764ef7a4bb87a25df1e92c6fc51060d4b92615df7f1306df71faf0fb6020630f",
+      "tools/evidence_check.py": "2edbd901d760d22e7e43a14e8e88ab0e089303f489055cd9b5e9d1f4dce50382",
+      "tools/exa_search.py": "f29f9950d476fdf66b1f7bf8ccdcd7a827ae069060c5980d86b3b6f580b437b1",
+      "tools/experiment_queue/README.md": "df7757d1b2cec27a52fd655a233948c5a031b846ea93e2167811a668877924b3",
+      "tools/experiment_queue/build_manifest.py": "e1daa4116e24a36f970e5fddf6d1493e6a7396933c4e21468c85593ca35d4a25",
+      "tools/experiment_queue/queue_manager.py": "eac75a1285c81eb1683906cc979486f14bbba612c7cf434c753dfacec1f79dda",
+      "tools/firecrawl_search.py": "ab004a8b96c47fefdbcc11f9a50707e2174dafa3765f35cee4ee29adbfe0425f",
+      "tools/forensics_gate.py": "6b702cffb656aada0290b7d06f218a96c2cc47d2cef924838b4b53f79233f80b",
+      "tools/iteration_log.py": "819c22ba20bb270e0a514edb2626e7e3a1c4bade36f809e3ee9571cc076f7cb0",
+      "tools/keenable_search.py": "94f72414f4394f45e93d49b25e8d2a1afb0770cc1baa30b850b8d56a789df91c",
+      "tools/openalex_fetch.py": "83a097cc925c321d6dbf74e72bd5c6e1fdcdb82840323d3cf246bb25c005d530",
+      "tools/provenance.py": "355bcd4ef02903d4686460fa6142badc57bb34ea62b369e5239f673a4f615a1e",
+      "tools/review_gate.py": "3f9b89c97bd271be815dc2da176b236314ba4e52344d8b890516e03fcc7c43f9",
+      "tools/reviewer_route.py": "3df7598694b3ddc6c2b502d517e41e4b6b2e5489af83610d5f85fb5989eda4b9",
+      "tools/run_state.py": "5fc466462e2d4c26c6de078dcb04100bafa3a9c56df9a0dc4e38f316a33df5b5",
+      "tools/save_trace.sh": "0aa7199d3a4d16cf005bfa41a01c6c696dfadbd65c60fad9f9f4b64f75b5ded6",
+      "tools/semantic_scholar_fetch.py": "2b8b2f5164b886eb0f9d73ea5495e43991e9b52fc84631de87e941bc3e3ccb7c",
+      "tools/threat_scan.py": "fe0f6d4ec38baa09b58a9dbdb4bde3039b9863a3e52dc79ada33d79f3c84e268",
+      "tools/verify_paper_audits.sh": "fb9de42c52b2acc64ad0e6f7e1abae4453a8c2c21580a36da0f6d1b8433540a0",
+      "tools/verify_papers.py": "ccf214f490d15554e17cc43856318dcee1ecd32361299c994b20983de2bc8d1e",
+      "tools/watchdog.py": "9c6522a7676d9bfac291e74ab462bf72f53180453ba4f6fc148075d334f3ae18"
+    }
+  },
+  "skills": [
+    {
+      "name": "research-lit",
+      "localName": "aris-research-lit",
+      "category": "literature-ideation",
+      "description": "综合文献调查",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "literature-source"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/research-lit/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "../shared-references/citation-discipline.md",
+          "status": "packaged",
+          "target": "skills/shared-references/citation-discipline.md"
+        },
+        {
+          "reference": "../shared-references/fan-out-pattern.md",
+          "status": "packaged",
+          "target": "skills/shared-references/fan-out-pattern.md"
+        },
+        {
+          "reference": "../shared-references/output-composition.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-composition.md"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        },
+        {
+          "reference": "skill:paper-write",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:idea-discovery",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:research-wiki",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "arxiv",
+      "localName": "aris-arxiv",
+      "category": "literature-ideation",
+      "description": "arXiv 论文检索与阅读",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "arxiv"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/arxiv/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "semantic-scholar",
+      "localName": "aris-semantic-scholar",
+      "category": "literature-ideation",
+      "description": "Semantic Scholar 检索",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "semantic-scholar"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/semantic-scholar/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:research-wiki",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "deepxiv",
+      "localName": "aris-deepxiv",
+      "category": "literature-ideation",
+      "description": "DeepXiv 渐进式论文阅读",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "deepxiv"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/deepxiv/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "https://pypi.org/project/deepxiv-sdk/1.2.2/",
+          "status": "external"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:deepxiv",
+          "status": "mapped",
+          "target": "aris-deepxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:alphaxiv",
+          "status": "mapped",
+          "target": "aris-alphaxiv"
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "openalex",
+      "localName": "aris-openalex",
+      "category": "literature-ideation",
+      "description": "OpenAlex 引用图检索",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "openalex"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/openalex/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "https://openalex.org/",
+          "status": "external"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:openalex",
+          "status": "mapped",
+          "target": "aris-openalex"
+        },
+        {
+          "reference": "skill:deepxiv",
+          "status": "mapped",
+          "target": "aris-deepxiv"
+        },
+        {
+          "reference": "skill:exa-search",
+          "status": "mapped",
+          "target": "aris-exa-search"
+        },
+        {
+          "reference": "skill:gemini-search",
+          "status": "mapped",
+          "target": "aris-gemini-search"
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "alphaxiv",
+      "localName": "aris-alphaxiv",
+      "category": "literature-ideation",
+      "description": "AlphaXiv 单篇阅读",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "web-search"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/alphaxiv/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "https://www.alphaxiv.org",
+          "status": "external"
+        },
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:deepxiv",
+          "status": "mapped",
+          "target": "aris-deepxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:alphaxiv",
+          "status": "mapped",
+          "target": "aris-alphaxiv"
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        },
+        {
+          "reference": "skill:tmp",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:novelty-check",
+          "status": "mapped",
+          "target": "aris-novelty-check"
+        },
+        {
+          "reference": "skill:idea-discovery",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "exa-search",
+      "localName": "aris-exa-search",
+      "category": "literature-ideation",
+      "description": "Exa 搜索",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "exa"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/exa-search/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "https://exa.ai",
+          "status": "external"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:deepxiv",
+          "status": "mapped",
+          "target": "aris-deepxiv"
+        },
+        {
+          "reference": "skill:exa-search",
+          "status": "mapped",
+          "target": "aris-exa-search"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "keenable-search",
+      "localName": "aris-keenable-search",
+      "category": "literature-ideation",
+      "description": "Keenable 搜索",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "keenable"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/keenable-search/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "https://app.keenable.ai/console",
+          "status": "external"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:exa-search",
+          "status": "mapped",
+          "target": "aris-exa-search"
+        },
+        {
+          "reference": "skill:keenable-search",
+          "status": "mapped",
+          "target": "aris-keenable-search"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "firecrawl-search",
+      "localName": "aris-firecrawl-search",
+      "category": "literature-ideation",
+      "description": "Firecrawl 检索与抓取",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "firecrawl"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/firecrawl-search/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "https://www.firecrawl.dev/app/api-keys",
+          "status": "external"
+        },
+        {
+          "reference": "../shared-references/citation-discipline.md",
+          "status": "packaged",
+          "target": "skills/shared-references/citation-discipline.md"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:openalex",
+          "status": "mapped",
+          "target": "aris-openalex"
+        },
+        {
+          "reference": "skill:deepxiv",
+          "status": "mapped",
+          "target": "aris-deepxiv"
+        },
+        {
+          "reference": "skill:exa-search",
+          "status": "mapped",
+          "target": "aris-exa-search"
+        },
+        {
+          "reference": "skill:firecrawl-search",
+          "status": "mapped",
+          "target": "aris-firecrawl-search"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "gemini-search",
+      "localName": "aris-gemini-search",
+      "category": "literature-ideation",
+      "description": "Gemini 文献搜索",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "gemini"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/gemini-search/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "https://github.com/jamubc/gemini-mcp-tool",
+          "status": "external"
+        },
+        {
+          "reference": "https://aistudio.google.com/apikey",
+          "status": "external"
+        },
+        {
+          "reference": "url",
+          "status": "unsupported",
+          "target": "skills/gemini-search/url"
+        },
+        {
+          "reference": "skill:arxiv",
+          "status": "mapped",
+          "target": "aris-arxiv"
+        },
+        {
+          "reference": "skill:semantic-scholar",
+          "status": "mapped",
+          "target": "aris-semantic-scholar"
+        },
+        {
+          "reference": "skill:deepxiv",
+          "status": "mapped",
+          "target": "aris-deepxiv"
+        },
+        {
+          "reference": "skill:exa-search",
+          "status": "mapped",
+          "target": "aris-exa-search"
+        },
+        {
+          "reference": "skill:gemini-search",
+          "status": "mapped",
+          "target": "aris-gemini-search"
+        },
+        {
+          "reference": "skill:dev",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "web-debug-search",
+      "localName": "aris-web-debug-search",
+      "category": "literature-ideation",
+      "description": "技术问题检索",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "web-search"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/web-debug-search/SKILL.md",
+      "dependencies": [],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "comm-lit-review",
+      "localName": "aris-comm-lit-review",
+      "category": "literature-ideation",
+      "description": "通信领域文献调查",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "literature-source"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/comm-lit-review/SKILL.md",
+      "dependencies": [],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "idea-creator",
+      "localName": "aris-idea-creator",
+      "category": "literature-ideation",
+      "description": "研究创意生成与筛选",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": true,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/idea-creator/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/injection-hygiene.md",
+          "status": "packaged",
+          "target": "skills/shared-references/injection-hygiene.md"
+        },
+        {
+          "reference": "../shared-references/fan-out-pattern.md",
+          "status": "packaged",
+          "target": "skills/shared-references/fan-out-pattern.md"
+        },
+        {
+          "reference": "../shared-references/acceptance-gate.md",
+          "status": "packaged",
+          "target": "skills/shared-references/acceptance-gate.md"
+        },
+        {
+          "reference": "../shared-references/output-composition.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-composition.md"
+        },
+        {
+          "reference": "../shared-references/output-versioning.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-versioning.md"
+        },
+        {
+          "reference": "../shared-references/output-manifest.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-manifest.md"
+        },
+        {
+          "reference": "../shared-references/output-language.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-language.md"
+        },
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "../shared-references/citation-discipline.md",
+          "status": "packaged",
+          "target": "skills/shared-references/citation-discipline.md"
+        },
+        {
+          "reference": "skill:research-lit",
+          "status": "mapped",
+          "target": "aris-research-lit"
+        },
+        {
+          "reference": "skill:novelty-check",
+          "status": "mapped",
+          "target": "aris-novelty-check"
+        },
+        {
+          "reference": "skill:run-experiment",
+          "status": "mapped",
+          "target": "aris-run-experiment"
+        },
+        {
+          "reference": "skill:monitor-experiment",
+          "status": "mapped",
+          "target": "aris-monitor-experiment"
+        },
+        {
+          "reference": "skill:research-review",
+          "status": "mapped",
+          "target": "aris-research-review"
+        },
+        {
+          "reference": "skill:idea-discovery",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:idea-creator",
+          "status": "mapped",
+          "target": "aris-idea-creator"
+        },
+        {
+          "reference": "skill:result-to-claim",
+          "status": "mapped",
+          "target": "aris-result-to-claim"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "pilot 必须另行走本地实验审批、实现、审查和受控运行；上游评审调用由本地研究审计工作流处理。"
+      ]
+    },
+    {
+      "name": "novelty-check",
+      "localName": "aris-novelty-check",
+      "category": "literature-ideation",
+      "description": "研究新颖性检查",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": true,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/novelty-check/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "../shared-references/citation-discipline.md",
+          "status": "packaged",
+          "target": "skills/shared-references/citation-discipline.md"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "pilot 必须另行走本地实验审批、实现、审查和受控运行；上游评审调用由本地研究审计工作流处理。"
+      ]
+    },
+    {
+      "name": "research-refine",
+      "localName": "aris-research-refine",
+      "category": "literature-ideation",
+      "description": "研究方法精炼",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": true,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/research-refine/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/output-versioning.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-versioning.md"
+        },
+        {
+          "reference": "../shared-references/output-manifest.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-manifest.md"
+        },
+        {
+          "reference": "../shared-references/output-language.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-language.md"
+        },
+        {
+          "reference": "skill:research-refine",
+          "status": "mapped",
+          "target": "aris-research-refine"
+        },
+        {
+          "reference": "skill:experiment-plan",
+          "status": "mapped",
+          "target": "aris-experiment-plan"
+        },
+        {
+          "reference": "skill:run-experiment",
+          "status": "mapped",
+          "target": "aris-run-experiment"
+        },
+        {
+          "reference": "skill:idea-creator",
+          "status": "mapped",
+          "target": "aris-idea-creator"
+        },
+        {
+          "reference": "skill:research-refine-pipeline",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "pilot 必须另行走本地实验审批、实现、审查和受控运行；上游评审调用由本地研究审计工作流处理。"
+      ]
+    },
+    {
+      "name": "experiment-plan",
+      "localName": "aris-experiment-plan",
+      "category": "literature-ideation",
+      "description": "实验路线与预算设计",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": true,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/experiment-plan/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/output-versioning.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-versioning.md"
+        },
+        {
+          "reference": "../shared-references/output-manifest.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-manifest.md"
+        },
+        {
+          "reference": "../shared-references/output-language.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-language.md"
+        },
+        {
+          "reference": "skill:research-refine-pipeline",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "ablation-planner",
+      "localName": "aris-ablation-planner",
+      "category": "literature-ideation",
+      "description": "消融实验设计",
+      "mode": "method",
+      "stages": [
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "claim-evidence"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/ablation-planner/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "skill:result-to-claim",
+          "status": "mapped",
+          "target": "aris-result-to-claim"
+        },
+        {
+          "reference": "skill:auto-review-loop",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "formula-derivation",
+      "localName": "aris-formula-derivation",
+      "category": "literature-ideation",
+      "description": "公式与理论推导",
+      "mode": "method",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/formula-derivation/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../lean-formalize/SKILL.md",
+          "status": "unsupported",
+          "target": "skills/lean-formalize/SKILL.md"
+        },
+        {
+          "reference": "skill:lean-formalize",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "research-implement-feature",
+      "localName": "aris-research-implement-feature",
+      "category": "experiments",
+      "description": "已批准研究功能实现",
+      "mode": "implementation",
+      "stages": [
+        "PLAN_APPROVED",
+        "IMPLEMENTATION_REVISION"
+      ],
+      "role": "implementation-worker",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/research-implement-feature/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/effort-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/effort-contract.md"
+        },
+        {
+          "reference": "../shared-references/output-language.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-language.md"
+        },
+        {
+          "reference": "../shared-references/acceptance-gate.md",
+          "status": "packaged",
+          "target": "skills/shared-references/acceptance-gate.md"
+        },
+        {
+          "reference": "../shared-references/output-manifest.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-manifest.md"
+        },
+        {
+          "reference": "../shared-references/capture-antipatterns.md",
+          "status": "packaged",
+          "target": "skills/shared-references/capture-antipatterns.md"
+        },
+        {
+          "reference": "../shared-references/injection-hygiene.md",
+          "status": "packaged",
+          "target": "skills/shared-references/injection-hygiene.md"
+        },
+        {
+          "reference": "../shared-references/reviewer-routing.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-routing.md"
+        },
+        {
+          "reference": "../shared-references/reviewer-independence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-independence.md"
+        },
+        {
+          "reference": "../shared-references/review-scope-limits.md",
+          "status": "packaged",
+          "target": "skills/shared-references/review-scope-limits.md"
+        },
+        {
+          "reference": "skill:research-pipeline",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:experiment-bridge",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:dse-loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:run-experiment",
+          "status": "mapped",
+          "target": "aris-run-experiment"
+        },
+        {
+          "reference": "skill:result-to-claim",
+          "status": "mapped",
+          "target": "aris-result-to-claim"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:experiment-audit",
+          "status": "mapped",
+          "target": "aris-experiment-audit"
+        },
+        {
+          "reference": "skill:research-implement-feature",
+          "status": "mapped",
+          "target": "aris-research-implement-feature"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "run-experiment",
+      "localName": "aris-run-experiment",
+      "category": "experiments",
+      "description": "已审查实验运行",
+      "mode": "execution",
+      "stages": [
+        "READY_TO_RUN"
+      ],
+      "role": "experiment-runner",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/run-experiment/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "skill:serverless-modal",
+          "status": "mapped",
+          "target": "aris-serverless-modal"
+        },
+        {
+          "reference": "skill:vast-gpu",
+          "status": "mapped",
+          "target": "aris-vast-gpu"
+        },
+        {
+          "reference": "skill:workspace",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:monitor-experiment",
+          "status": "mapped",
+          "target": "aris-monitor-experiment"
+        },
+        {
+          "reference": "skill:home",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:run-experiment",
+          "status": "mapped",
+          "target": "aris-run-experiment"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "monitor-experiment",
+      "localName": "aris-monitor-experiment",
+      "category": "experiments",
+      "description": "实验进度监控",
+      "mode": "monitor",
+      "stages": [
+        "RUNNING",
+        "ANALYSIS",
+        "EXECUTION_FAILED"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/monitor-experiment/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:vast-gpu",
+          "status": "mapped",
+          "target": "aris-vast-gpu"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "analyze-results",
+      "localName": "aris-analyze-results",
+      "category": "experiments",
+      "description": "实验结果分析",
+      "mode": "method",
+      "stages": [
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/analyze-results/SKILL.md",
+      "dependencies": [],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "experiment-queue",
+      "localName": "aris-experiment-queue",
+      "category": "experiments",
+      "description": "多种子实验队列规划",
+      "mode": "planning-only",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT",
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/experiment-queue/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "skill:run-experiment",
+          "status": "mapped",
+          "target": "aris-run-experiment"
+        },
+        {
+          "reference": "skill:monitor-experiment",
+          "status": "mapped",
+          "target": "aris-monitor-experiment"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:tmp",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:analyze-results",
+          "status": "mapped",
+          "target": "aris-analyze-results"
+        },
+        {
+          "reference": "skill:experiment-queue",
+          "status": "mapped",
+          "target": "aris-experiment-queue"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "仅准备方案；租赁、同步、安装、自动重试、插桩及实际运行须写入已批准 RUN.json。"
+      ]
+    },
+    {
+      "name": "vast-gpu",
+      "localName": "aris-vast-gpu",
+      "category": "experiments",
+      "description": "Vast.ai 资源规划",
+      "mode": "planning-only",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT",
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/vast-gpu/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "skill:run-experiment",
+          "status": "mapped",
+          "target": "aris-run-experiment"
+        },
+        {
+          "reference": "skill:monitor-experiment",
+          "status": "mapped",
+          "target": "aris-monitor-experiment"
+        },
+        {
+          "reference": "skill:workspace",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "仅准备方案；租赁、同步、安装、自动重试、插桩及实际运行须写入已批准 RUN.json。"
+      ]
+    },
+    {
+      "name": "serverless-modal",
+      "localName": "aris-serverless-modal",
+      "category": "experiments",
+      "description": "Modal 执行规划",
+      "mode": "planning-only",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT",
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/serverless-modal/SKILL.md",
+      "dependencies": [],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "仅准备方案；租赁、同步、安装、自动重试、插桩及实际运行须写入已批准 RUN.json。"
+      ]
+    },
+    {
+      "name": "qzcli",
+      "localName": "aris-qzcli",
+      "category": "experiments",
+      "description": "启智任务规划",
+      "mode": "planning-only",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT",
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/qzcli/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "https://github.com/tianyilt/qzcli_tool",
+          "status": "external"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "仅准备方案；租赁、同步、安装、自动重试、插桩及实际运行须写入已批准 RUN.json。"
+      ]
+    },
+    {
+      "name": "training-check",
+      "localName": "aris-training-check",
+      "category": "experiments",
+      "description": "训练健康监控",
+      "mode": "monitor",
+      "stages": [
+        "RUNNING",
+        "ANALYSIS",
+        "EXECUTION_FAILED"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "wandb"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/training-check/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "../../tools/watchdog.py",
+          "status": "packaged",
+          "target": "tools/watchdog.py"
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "system-profile",
+      "localName": "aris-system-profile",
+      "category": "experiments",
+      "description": "系统性能分析规划",
+      "mode": "planning-only",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT",
+        "ANALYSIS"
+      ],
+      "role": "captain",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/system-profile/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "skill:usr",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "RESULT.md"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。",
+        "仅准备方案；租赁、同步、安装、自动重试、插桩及实际运行须写入已批准 RUN.json。"
+      ]
+    },
+    {
+      "name": "research-review",
+      "localName": "aris-research-review",
+      "category": "audit",
+      "description": "研究论证独立评审",
+      "mode": "audit",
+      "stages": [
+        "IDLE",
+        "PLAN_DRAFT",
+        "ANALYSIS"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/research-review/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/output-composition.md",
+          "status": "packaged",
+          "target": "skills/shared-references/output-composition.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:idea-discovery",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "experiment-audit",
+      "localName": "aris-experiment-audit",
+      "category": "audit",
+      "description": "实验真实性审计",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/experiment-audit/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:experiment-bridge",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:auto-review-loop",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "result-to-claim",
+      "localName": "aris-result-to-claim",
+      "category": "audit",
+      "description": "结果与研究主张核验",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/result-to-claim/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "../shared-references/evidence-precheck.md",
+          "status": "packaged",
+          "target": "skills/shared-references/evidence-precheck.md"
+        },
+        {
+          "reference": "../shared-references/wiki-helper-resolution.md",
+          "status": "packaged",
+          "target": "skills/shared-references/wiki-helper-resolution.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:ablation-planner",
+          "status": "mapped",
+          "target": "aris-ablation-planner"
+        },
+        {
+          "reference": "skill:proof-checker",
+          "status": "mapped",
+          "target": "aris-proof-checker"
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "paper-claim-audit",
+      "localName": "aris-paper-claim-audit",
+      "category": "audit",
+      "description": "论文数值与证据审计",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/paper-claim-audit/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:experiment-audit",
+          "status": "mapped",
+          "target": "aris-experiment-audit"
+        },
+        {
+          "reference": "skill:result-to-claim",
+          "status": "mapped",
+          "target": "aris-result-to-claim"
+        },
+        {
+          "reference": "skill:paper-claim-audit",
+          "status": "mapped",
+          "target": "aris-paper-claim-audit"
+        },
+        {
+          "reference": "skill:paper-write",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:auto-paper-improvement-loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:render-html",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "citation-audit",
+      "localName": "aris-citation-audit",
+      "category": "audit",
+      "description": "引用真实性与语境审计",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "independent-web"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/citation-audit/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:resubmit-pipeline",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:tmp",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:experiment-audit",
+          "status": "mapped",
+          "target": "aris-experiment-audit"
+        },
+        {
+          "reference": "skill:result-to-claim",
+          "status": "mapped",
+          "target": "aris-result-to-claim"
+        },
+        {
+          "reference": "skill:paper-claim-audit",
+          "status": "mapped",
+          "target": "aris-paper-claim-audit"
+        },
+        {
+          "reference": "skill:citation-audit",
+          "status": "mapped",
+          "target": "aris-citation-audit"
+        },
+        {
+          "reference": "skill:render-html",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "citation-crosscheck",
+      "localName": "aris-citation-crosscheck",
+      "category": "audit",
+      "description": "引用元数据交叉核验",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "independent-web"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/citation-crosscheck/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "../shared-references/fan-out-pattern.md",
+          "status": "packaged",
+          "target": "skills/shared-references/fan-out-pattern.md"
+        },
+        {
+          "reference": "../shared-references/acceptance-gate.md",
+          "status": "packaged",
+          "target": "skills/shared-references/acceptance-gate.md"
+        },
+        {
+          "reference": "../shared-references/integration-contract.md",
+          "status": "packaged",
+          "target": "skills/shared-references/integration-contract.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:abs",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:bibtex",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:blog",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:tmp",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "proof-checker",
+      "localName": "aris-proof-checker",
+      "category": "audit",
+      "description": "数学证明检查",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/proof-checker/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "../shared-references/fan-out-pattern.md",
+          "status": "packaged",
+          "target": "skills/shared-references/fan-out-pattern.md"
+        },
+        {
+          "reference": "../lean-formalize/SKILL.md",
+          "status": "unsupported",
+          "target": "skills/lean-formalize/SKILL.md"
+        },
+        {
+          "reference": "skill:lean-formalize",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:paper-writing",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:render-html",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:result-to-claim",
+          "status": "mapped",
+          "target": "aris-result-to-claim"
+        },
+        {
+          "reference": "skill:proof-checker",
+          "status": "mapped",
+          "target": "aris-proof-checker"
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "kill-argument",
+      "localName": "aris-kill-argument",
+      "category": "audit",
+      "description": "攻击与裁决分离的论证检查",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [],
+      "upstreamPath": ".pi/vendor/aris/skills/kill-argument/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "../shared-references/reviewer-backends.md",
+          "status": "packaged",
+          "target": "skills/shared-references/reviewer-backends.md"
+        },
+        {
+          "reference": "../shared-references/external-cadence.md",
+          "status": "packaged",
+          "target": "skills/shared-references/external-cadence.md"
+        },
+        {
+          "reference": "../shared-references/fan-out-pattern.md",
+          "status": "packaged",
+          "target": "skills/shared-references/fan-out-pattern.md"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:research-review",
+          "status": "mapped",
+          "target": "aris-research-review"
+        },
+        {
+          "reference": "skill:auto-paper-improvement-loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:proof-checker",
+          "status": "mapped",
+          "target": "aris-proof-checker"
+        },
+        {
+          "reference": "skill:paper-claim-audit",
+          "status": "mapped",
+          "target": "aris-paper-claim-audit"
+        },
+        {
+          "reference": "skill:citation-audit",
+          "status": "mapped",
+          "target": "aris-citation-audit"
+        },
+        {
+          "reference": "skill:kill-argument",
+          "status": "mapped",
+          "target": "aris-kill-argument"
+        },
+        {
+          "reference": "skill:render-html",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    },
+    {
+      "name": "integrity-forensics",
+      "localName": "aris-integrity-forensics",
+      "category": "audit",
+      "description": "研究诚信取证",
+      "mode": "audit",
+      "stages": [
+        "ANALYSIS",
+        "IDLE"
+      ],
+      "role": "independent-research-auditor",
+      "projectRequired": false,
+      "requiredCapabilities": [
+        "external-forensics-runtime"
+      ],
+      "upstreamPath": ".pi/vendor/aris/skills/integrity-forensics/SKILL.md",
+      "dependencies": [
+        {
+          "reference": "https://github.com/wanshuiyin/Anti-Autoresearch",
+          "status": "external"
+        },
+        {
+          "reference": "skill:loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:schedule",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:figures",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:paper-claim-audit",
+          "status": "mapped",
+          "target": "aris-paper-claim-audit"
+        },
+        {
+          "reference": "skill:experiment-audit",
+          "status": "mapped",
+          "target": "aris-experiment-audit"
+        },
+        {
+          "reference": "skill:citation-audit",
+          "status": "mapped",
+          "target": "aris-citation-audit"
+        },
+        {
+          "reference": "skill:proof-checker",
+          "status": "mapped",
+          "target": "aris-proof-checker"
+        },
+        {
+          "reference": "skill:auto-review-loop",
+          "status": "unsupported",
+          "target": null
+        },
+        {
+          "reference": "skill:auto-paper-improvement-loop",
+          "status": "unsupported",
+          "target": null
+        }
+      ],
+      "expectedArtifacts": [
+        "review.json",
+        "review.md",
+        "review.events.jsonl"
+      ],
+      "limitations": [
+        "只加载当前任务所需上游段落；未映射子调用和外部依赖必须显式停止或报告缺失。"
+      ]
+    }
+  ],
+  "childRoutes": {
+    "research-lit": "aris-research-lit",
+    "arxiv": "aris-arxiv",
+    "semantic-scholar": "aris-semantic-scholar",
+    "deepxiv": "aris-deepxiv",
+    "openalex": "aris-openalex",
+    "alphaxiv": "aris-alphaxiv",
+    "exa-search": "aris-exa-search",
+    "keenable-search": "aris-keenable-search",
+    "firecrawl-search": "aris-firecrawl-search",
+    "gemini-search": "aris-gemini-search",
+    "web-debug-search": "aris-web-debug-search",
+    "comm-lit-review": "aris-comm-lit-review",
+    "idea-creator": "aris-idea-creator",
+    "novelty-check": "aris-novelty-check",
+    "research-refine": "aris-research-refine",
+    "experiment-plan": "aris-experiment-plan",
+    "ablation-planner": "aris-ablation-planner",
+    "formula-derivation": "aris-formula-derivation",
+    "research-implement-feature": "aris-research-implement-feature",
+    "run-experiment": "aris-run-experiment",
+    "monitor-experiment": "aris-monitor-experiment",
+    "analyze-results": "aris-analyze-results",
+    "experiment-queue": "aris-experiment-queue",
+    "vast-gpu": "aris-vast-gpu",
+    "serverless-modal": "aris-serverless-modal",
+    "qzcli": "aris-qzcli",
+    "training-check": "aris-training-check",
+    "system-profile": "aris-system-profile",
+    "research-review": "aris-research-review",
+    "experiment-audit": "aris-experiment-audit",
+    "result-to-claim": "aris-result-to-claim",
+    "paper-claim-audit": "aris-paper-claim-audit",
+    "citation-audit": "aris-citation-audit",
+    "citation-crosscheck": "aris-citation-crosscheck",
+    "proof-checker": "aris-proof-checker",
+    "kill-argument": "aris-kill-argument",
+    "integrity-forensics": "aris-integrity-forensics"
+  },
+  "disabledChildren": {
+    "feishu-notify": "未授权通知",
+    "research-wiki": "研究记忆使用 .research/，不启用第二状态系统",
+    "research-pipeline": "由现有 Pi 状态机编排",
+    "idea-discovery": "按本地阶段交接",
+    "experiment-bridge": "按本地审批、实现、审查与运行交接",
+    "auto-review-loop": "不启用自主循环"
+  },
+  "modelPolicy": {
+    "executorModel": "deepseek/deepseek-flash",
+    "executorThinking": "low",
+    "reviewerModel": "deepseek/deepseek-v4-pro",
+    "reviewerThinking": "high",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional",
+    "upstreamAcceptanceSatisfied": false,
+    "authorization": "用户于 2026-10-31 明确选择沿用 DeepSeek Flash／Pro 并记录审计差异。",
+    "differences": [
+      "同家族不同模型，不满足上游 cross-family / accepted。",
+      "本地 low/high 不等于上游 xhigh/ultra。",
+      "只读研究审计不能独立联网、运行脚本或看未提供的图像；缺失能力时阻断。",
+      "本地代码 PASS 与研究审计分开；研究审计不授予正式运行资格。"
+    ]
+  }
+}

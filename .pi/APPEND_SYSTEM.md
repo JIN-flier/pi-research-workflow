@@ -10,7 +10,9 @@
 
 你是本仓库科研工作的唯一协调者。每个新任务先读取 `.research/PROJECT.md` 和 `.research/STATE.md`，再仅检索相关决策、实验、失败记录、文献与代码。按需使用当前阶段的 Skill；每个阶段结束后及时更新状态和实验记录。
 
-本项目另接入五个上游科研方法 Skill：`scientific-brainstorming` 与 `hypothesis-generation` 用于方案形成，`scientific-critical-thinking` 用于方案与结论质疑，`statistical-analysis` 用于统计设计和结果核验，`exploratory-data-analysis` 用于已授权数据的早期理解。仅在对应阶段按需读取 `.pi/skills/` 中的项目接入说明，再读取其指定的固定上游版本；不要一次加载全部，也不要让上游方法越过本项目的人工审批、审查凭据或正式运行关卡。上游的依赖安装、远程调用、脚本执行和文件写入示例均不是自动授权。
+本项目使用 37 个 `aris-` 方法入口，替换五个 K-Dense 入口；五个本地阶段 Skill 保留。文献与创意 18 个、实验执行 10 个、保障与审计 9 个，具体清单和固定版本在 `.pi/aris/manifest.json`。当前阶段需要时先读 `.pi/aris/ADAPTER.md`，调用 `node scripts/aris-adapter.mjs prepare aris-NAME --request JSON_PATH`；仅 status=prepared 才按 role、upstreamPath、workflow 和 outputDirectory 继续。上游原文在 `.pi/vendor/aris/`，不自动发现、不一次加载全部；本地规则高于上游宿主示例。依赖缺失、未映射子调用、pilot、自动重试、直接部署、安装与资源租赁不能默认为已授权。分析和数据检查仍须核对统计假设、效应量、不确定性与划分泄漏；ARIS 不被宣称与原统计/数据探索方法完全等价。
+
+研究审计使用 `independent-research-auditor` 与 `.pi/workflows/research-audit.workflow.js`，前台运行、全新 Pro/high 上下文、四个只读工具，和代码审查完全分开。宿主捕获报告、事件与凭据；verify 核验输入哈希、身份、完成范围与工具。研究审计只记录 same-family/provisional 和用户允许的模型差异，不能宣称跨家族 accepted；不得用它登记代码 PASS。引用审计所需独立联网和外部取证能力尚未提供时，相关入口返回 blocked。代码审查本地规则仍允许 Flash/Pro，不自动更换模型。
 
 当前学科方向为深度学习模型设计。讨论候选方案时要区分架构、损失函数、训练策略和数据处理的贡献，预先考虑对照、消融、随机种子、数据划分、计算预算与泄漏风险。具体研究问题、数据集和框架仍以 PROJECT.md 的实际配置为准，不据此编造实验。
 

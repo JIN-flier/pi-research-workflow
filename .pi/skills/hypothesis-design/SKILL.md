@@ -12,8 +12,8 @@ description: 设计一个可证伪的假设，以及能够作出判断的最小�
 
 ## 步骤
 1. 检索 `HYPOTHESES.md` 和已否决的决策，排除重复想法。
-2. 需要拓展研究方向时，按需调用 `scientific-brainstorming`；已有观察或初步证据时，按需调用 `hypothesis-generation`。将候选与证据、假设分开，保留竞争性解释；不得把候选直接当成获批准的方案。
-3. 在确定单项方案前，按需用 `scientific-critical-thinking` 检查混杂、偏差和证据强度；涉及统计比较时，用 `statistical-analysis` 预先定义比较、效应量和不确定性。上述方法不改变审批关卡。
+2. 按 `.pi/aris/ADAPTER.md` 准备 `aris-idea-creator`、`aris-research-refine`、`aris-novelty-check` 的当前任务调用，将候选、证据与假设分开，保留竞争解释。上游 pilot 仅形成待审批实验，不直接运行。
+3. 通过 `aris-research-review` 检查混杂、偏差和证据强度，用 `aris-experiment-plan` 收敛实验路线。涉及统计比较时预先定义统计假设、比较、效应量与不确定性；ARIS 分析入口不等于专门统计方法，需要的分析代码纳入真实方案，不推断功能等价。
 4. 陈述机制、竞争性解释及可测量的证伪标准。
 5. 明确干预、基线/对照、数据划分、指标、随机种子、统计比较、预期结果、成本与风险。
 6. 填写 `PLAN.md` 和 `RUN.json` 中拟执行且不可随意变更的命令；将两者提交 Git，并调用 `submit-plan`。

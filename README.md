@@ -1,6 +1,6 @@
 # Pi Agent 科研工作流：安装、使用与持续演进
 
-本仓库提供科研记忆、五个原有阶段 Skill、五个按需接入的科研方法 Skill、三个具名子代理，以及人工方案审批、独立代码审查和受控执行关卡。学科方向是深度学习模型设计；当前尚未配置具体科学问题、数据集或研究代码，状态为 `IDLE`。它是 Phase 2–4 的工作流基础设施，尚不是无人值守的完整科研循环。
+本仓库提供科研记忆、五个本地阶段 Skill、37 个通过转接层接入的 ARIS Skill、四个具名子代理，以及人工方案审批、独立代码审查、研究审计和受控执行关卡。学科方向是深度学习模型设计；当前尚未配置具体科学问题、数据集或研究代码，状态为 `IDLE`。它是 Phase 2–4 的工作流基础设施，尚不是无人值守的完整科研循环。
 
 本指南使用 Linux/macOS 的 Bash 命令；Windows 用户可在 WSL 中使用同一流程。命令块在终端执行，标为“对话模板”的文本粘贴到交互式 Pi。模板中的 `〈…〉` 必须替换为真实信息；不得把示例内容当作真实实验或审批结果。
 
@@ -64,12 +64,12 @@ git config user.email "你的邮箱"
 | Pi CLI / SDK 1.4.0 | 需要 | 交互会话、模型调用与 SDK，使用上节 npm 命令安装 |
 | `@quintinshaw/pi-dynamic-workflows@3.14.0` | 需要 | workflow、子代理、checkpoint、workflow-authoring 等插件能力 |
 | 项目适配扩展 | 已随仓库提供 | `.pi/extensions/research-workflow.ts`，约束最终工具集合并捕获审查凭据 |
-| 十个项目 Skill（原有五个阶段 Skill + 五个科研方法适配层） | 已随仓库提供 | `.pi/skills/`，按阶段读取，不应一次全部加载 |
-| 五个固定版本的上游科研 Skill | 已随仓库提供 | `.pi/vendor/scientific-agent-skills/`，供适配层按需引用；不会被 Pi 作为项目 Skill 自动发现 |
-| 三个角色定义 | 已随仓库提供 | `.pi/agents/`，由 workflow 的 `agentType` 使用 |
+| 42 个项目 Skill（五个阶段入口 + 37 个 ARIS 入口） | 已随仓库提供 | `.pi/skills/`，按阶段读取，不应一次全部加载 |
+| 固定版本 ARIS 原文及共享依赖 | 已随仓库提供 | `.pi/vendor/aris/`；按当前 workflow 选择依赖，不自动发现或运行安装器 |
+| 四个角色定义 | 已随仓库提供 | `.pi/agents/`，由 workflow 的 `agentType` 使用；研究审计与代码审查分开 |
 | 系统提示与审批提示 | 已随仓库提供 | `.pi/APPEND_SYSTEM.md` 与 `.pi/prompts/research-plan-review.md` |
 
-不需要另外安装通用 subagent 或 plan-mode 插件来完成本指南。`.pi/pi-compact.json` 只是保留的配置文件；仓库没有声明对应运行插件，不能据此认定额外的自动记忆功能已经启用。研究恢复以 `.research/` 文件为准。
+不需要另外安装通用 subagent、plan-mode 或 compact 插件。研究恢复以 `.research/` 文件为准。
 
 ### 2.2 安装项目本地 workflow 依赖
 
@@ -101,19 +101,23 @@ npm ls --prefix .pi/npm @quintinshaw/pi-dynamic-workflows
 
 `extensions: []` 保留包中的 Skill，由本地扩展统一加载 workflow 运行入口。此项目无需再次运行通用的 `pi install` 来注册同一包；不要把该声明替换成会自动加载上游扩展的简单字符串。如果用户级设置已有该插件，请用 `pi config` 检查资源配置，避免额外加载第二份上游入口。一般插件安装方式可参考 [Pi Packages](https://pi.dev/docs/latest/packages) 和 [插件上游说明](https://github.com/QuintinShaw/pi-dynamic-workflows)。
 
-### 2.3 上游科研 Skill 的选择性接入
+### 2.3 ARIS Skill 接入
 
-本仓库从 [K-Dense Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills) 固定 commit 中接入五个与当前通用科研流程直接相关的 Skill，保留各目录的参考资料、模板和脚本。版本、许可证与选择范围见 [ORIGIN.md](.pi/vendor/scientific-agent-skills/ORIGIN.md)。项目入口在 `.pi/skills/`：它们先检查当前研究阶段并说明中文输出及关卡边界，再按需读取相应上游文件。上游目录本身不作为 Pi 的项目 Skill 自动加载；其中的 Python 环境安装和脚本示例须按真实研究任务另行判断。
+37 个 canonical Skill 来自 [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) 的固定 commit `9a4f093dcf6fd7cd37ac2f2e79e9a0a7af05a492`：文献与创意 18 个、实验执行 10 个、保障与审计 9 个。保留上游原文、MIT 许可证、共享参考、helper 与模板，逐文件 SHA256 及引用分类在 [.pi/aris/manifest.json](.pi/aris/manifest.json)。五个 K-Dense 方法入口已由 ARIS 接替，停用的 K-Dense 资料已移除。上游只保留这 37 个入口及所需参考、helper、模板，共 103 个原文件；未接入的专利、制图、Overleaf、安装器和自更新资源不随项目保留。
 
-| 项目 Skill 命令 | 何时用 | 接入阶段 |
+Pi 入口统一使用 `/skill:aris-<name>`。五个本地阶段 Skill 继续负责本地记录和交接。先读 [转接契约](.pi/aris/ADAPTER.md)，再准备当前调用；不要一次加载全部原文。
+
+| 阶段 | 常用入口 | 本地边界 |
 | --- | --- | --- |
-| `/skill:scientific-brainstorming` | 发散多个候选方向，记录假设与竞争解释 | 假设设计前 |
-| `/skill:hypothesis-generation` | 从真实观察形成可区分的预测与证伪条件 | PLAN_DRAFT |
-| `/skill:scientific-critical-thinking` | 检查方案或结论的偏差、混杂和证据强度 | PLAN_DRAFT、ANALYSIS |
-| `/skill:statistical-analysis` | 预先确定统计比较，或核验已批准分析 | PLAN_DRAFT、ANALYSIS |
-| `/skill:exploratory-data-analysis` | 已授权数据的格式、缺失、分布与泄漏检查 | 项目配置、PLAN_DRAFT |
+| 文献与候选方向 | `aris-research-lit`、`aris-idea-creator`、`aris-novelty-check` | 缺少项目资料时列出缺口；pilot 不自动启动 |
+| 方法与方案 | `aris-research-refine`、`aris-experiment-plan`、`aris-research-review` | 收敛到原 PLAN.md/RUN.json，仍需人工批准 |
+| 已批准实现与执行 | `aris-research-implement-feature`、`aris-run-experiment` | Worker/Runner 经受控 workflow；运行仍仅用 check-run/run |
+| 监控与分析 | `aris-monitor-experiment`、`aris-analyze-results` | 读取真实输出，不自动重试或改参 |
+| 结果审计 | `aris-experiment-audit`、`aris-result-to-claim` | 全新 Pro/high 只读审计；单独捕获凭据 |
 
-当前已确定方向为深度学习模型设计，但尚未给出具体任务、数据格式或框架，因此没有复制上游全部 Skill。以后确定具体任务或框架（例如 Transformers、PyTorch Lightning 或图神经网络）时，按 [ORIGIN.md](.pi/vendor/scientific-agent-skills/ORIGIN.md) 的来源选取相应目录并核对许可证与依赖。新增方法不改变人工方案审批、独立代码审查或受控运行的状态关卡。
+完整清单、请求格式和 workflow 参数见 [ARIS 操作指南](.research/workflow/ARIS.md)。`node scripts/aris-adapter.mjs list` 列出入口、阶段与所需能力；`verify-vendor` 校验固定文件。已下载不等于外部来源和计算平台已配置：默认不联网探测、不安装依赖、不租赁 GPU。队列和云平台入口只作待审批规划；需要独立联网的两项引用审计及外部诚信取证在当前工具策略下 blocked。
+
+沿用 DeepSeek Flash/low、Pro/high。研究审计记录 `same-family / provisional` 及本地授权差异，保留负面结论；不能声称满足 ARIS 跨家族接受要求。研究审计凭据不用于 `record-review`，本地代码关卡继续使用原策略。
 
 ### 2.4 配置 API 凭据
 
@@ -139,7 +143,8 @@ pi --list-models deepseek
 | --- | --- | --- | --- |
 | Captain，总协调者 | `.pi/settings.json` | `deepseek/deepseek-flash` | `low` |
 | Worker，实现 | `.pi/agents/implementation-worker.md` | `deepseek/deepseek-flash` | `low` |
-| Reviewer，独立审查 | `.pi/agents/independent-code-reviewer.md` | `deepseek/deepseek-v4-pro` | `high` |
+| Reviewer，独立代码审查 | `.pi/agents/independent-code-reviewer.md` | `deepseek/deepseek-v4-pro` | `high` |
+| Auditor，独立研究审计 | `.pi/agents/independent-research-auditor.md` | `deepseek/deepseek-v4-pro` | `high` |
 | Runner，执行 | `.pi/agents/experiment-runner.md` | `deepseek/deepseek-flash` | `low` |
 
 Reviewer 的 `high` 是用户在 SDK 能力检查后明确选择的配置，V4 Pro 不支持 `low`，不得静默降级或把实际 high 标为 low。更换角色模型时，不仅要改主会话 `/model`，还要同步角色定义和 `code-review.workflow.js` 中的显式模型/thinking，并重新验证兼容性。
@@ -169,7 +174,7 @@ pi -a
 ```text
 请用简体中文检查本仓库的科研工作流是否可用。
 先读取 .research/PROJECT.md，再读取 .research/STATE.md。
-核对项目本地扩展、workflow 依赖版本、三个角色的模型/thinking/工具策略，
+核对项目本地扩展、workflow 依赖版本、四个角色的模型/thinking/工具策略，
 以及 /research-plan-review 提示是否可发现。
 目前只做只读检查，报告可用项、缺失项和下一步；不要创建实验、审批或调用子代理。
 不要输出任何密钥。
@@ -181,7 +186,7 @@ pi -a
 node --test tests/*.test.mjs
 ```
 
-**当前已知验证边界：**2026-10-31 接入科研 Skill 后的最近一次记录为 31 项中 29 项通过，两项既有 SDK 证据集成测试仍失败，见 [HARDENING.md](.research/workflow/HARDENING.md)。安装成功不代表这些问题已修复；正式研究前应排查失败并验证真实审查凭据链路，不得跳过凭据校验。可选的 `node tests/manual/pi-workflow-smoke.mjs` 会调用付费 DeepSeek API，仅在明确准备承担调用时另行执行；它使用临时合成项目，不代表真实科研实验或人工批准。
+**验证边界：**ARIS 接入包含真实 Pi SDK 和进程内合成传输的离线测试。此前两项 SDK 凭据 fixture 失败已定位：旧工具列表格式不兼容，以及生成缓存被误当成代码改动；具体回归见 [HARDENING.md](.research/workflow/HARDENING.md)。离线通过不代表外部来源、真实 GPU、付费模型中文遵从性或研究方法质量已验证。可选 `node tests/manual/pi-workflow-smoke.mjs` 会调用付费 API，只在另行明确启动时执行。
 
 ## 4. 填写项目并理解研究现状
 
@@ -216,7 +221,7 @@ node --test tests/*.test.mjs
 列出当前状态允许的下一步；不要推进状态或默认读取全部历史。
 ```
 
-已获数据使用授权并给出明确路径时，可在正式方案前使用 `/skill:exploratory-data-analysis` 检查数据质量和划分泄漏；探索结果不能当作正式实验，也不用于偷看保留测试集。
+已获数据使用授权并给出明确路径时，先规划格式、缺失、分布与划分泄漏检查；实际探测代码和数据访问遵循项目授权与关卡。ARIS 没有直接等价的数据探索入口，不能靠重命名补齐；探索结果不作为正式实验，也不用于偷看保留测试集。
 
 Python 项目使用 uv。让实现方案明确 Python 版本、依赖与安装方式；按需创建并提交 `pyproject.toml`、`.python-version`、`uv.lock`，忽略 `.venv`。实验所需环境变更也应纳入方案与代码审查，不能在批准后临时更换依赖或命令。uv 的安装方法见 [官方安装指南](https://docs.astral.sh/uv/getting-started/installation/)。
 
@@ -241,7 +246,7 @@ Python 项目使用 uv。让实现方案明确 Python 版本、依赖与安装�
 **对话模板：先发散，再形成可检验候选**
 
 ```text
-/skill:scientific-brainstorming
+/skill:aris-idea-creator
 ```
 
 ```text
@@ -251,7 +256,7 @@ Python 项目使用 uv。让实现方案明确 Python 版本、依赖与安装�
 保留不同意见与负面证据。此时不要选择获胜方案、提交 PLAN.md 或运行实验。
 ```
 
-有真实观察或初步结果后，可使用 `/skill:hypothesis-generation`，要求把观察、候选假设、替代解释及区分性预测明确分开。进入方案提交前，用 `/skill:scientific-critical-thinking` 检查设计、偏差和推断；需要统计比较时，用 `/skill:statistical-analysis` 预先定义比较与不确定性。所有方法输出最终由现有 `hypothesis-design` 收敛为一项可审查实验。
+有真实观察或初步结果后，用 `/skill:aris-research-refine` 精炼问题和方法，以 `/skill:aris-novelty-check` 比较最接近工作，再用 `/skill:aris-experiment-plan` 规划对照、消融、预算和运行顺序。需要独立质疑时通过 `/skill:aris-research-review` 的审计 workflow。统计假设、效应量与不确定性仍需预先明确；ARIS 分析方法不被视为原统计 Skill 的完整替代。所有方法最终由现有 `hypothesis-design` 收敛为一项可审查实验；上游 pilot 不直接执行。
 
 **对话模板：提出一项假设**
 
@@ -471,8 +476,8 @@ tail -f outputs/EXP-0001/stdout.log
 ```text
 核验当前实验的退出状态、执行 commit、数据来源、原始输出及批准方案。
 依据预先声明的指标重新计算或核验结果，与基线和证伪标准比较。
-按需调用 /skill:statistical-analysis 检查统计假设、效应量与不确定性；
-再用 /skill:scientific-critical-thinking 检查结论是否超出证据。
+按需调用 /skill:aris-analyze-results 整理真实结果，核对已批准统计假设、效应量与不确定性；
+再用独立 /skill:aris-experiment-audit 和 /skill:aris-result-to-claim 检查真实性与主张。
 分析方差、混杂、泄漏、偏离方案和失败案例，在 RESULTS.md 中给出中文分析，
 保留命令、输出路径、不确定性、局限与证据引用；替换待填写内容。
 不得改指标、排除失败运行，或仅凭退出码宣称研究成功。
@@ -611,7 +616,7 @@ RUNNING 时只监控已有进程，不再次运行；待审时恢复真实审批
 | 位置 | 用途 |
 | --- | --- |
 | `.research/PROJECT.md` | 科学问题与项目约束的来源 |
-| `.pi/skills/`、`.pi/vendor/scientific-agent-skills/` | 阶段 Skill、方法适配层及固定版本上游资料 |
+| `.pi/skills/`、`.pi/aris/`、`.pi/vendor/aris/` | 本地阶段、37 个 ARIS 入口、转接契约、固定上游与依赖 |
 | `.research/STATE.md` | 状态恢复入口，状态转换使用脚本，不手改绕关 |
 | `.research/DECISIONS.md`、`HYPOTHESES.md` | 跨轮次决策与假设记忆 |
 | `.research/literature/`、`failures/`、`reviews/` | 文献、失败和审查记录 |

@@ -1,41 +1,63 @@
-# Workflow 修复保留状态
+# Workflow 验证与兼容性
 
-## 当前范围
+日期：2026-10-31。范围：工作流基础设施；真实项目保持 IDLE、无当前实验。
 
-保留通用 workflow 修复；具体研究项目尚未配置。模型代码、实验记录、数据集、Python/uv 环境及历史运行日志均已清理，当前没有活动实验。
+## 来源与入口
 
-## 保留的修复
+- 上游：`wanshuiyin/Auto-claude-code-research-in-sleep`。
+- 固定 commit：`9a4f093dcf6fd7cd37ac2f2e79e9a0a7af05a492`。
+- 当前保留 37 个 canonical Skill 及所需 shared-references、tools、templates 和 MIT LICENSE，共 103 个上游文件；逐文件 SHA256 在 `.pi/aris/manifest.json`。初次导入的 147 个原文件中，44 个未接入资源已按整理要求移除。
+- 原文件保持上游原文；导入脚本按明确清单选择资源，并拒绝所选源文件存在修改或未跟踪内容。清理后的来源哈希与依赖完整性另行核验。
+- 37 个本地入口通过 Skill 结构校验；实际 Pi SDK 发现 37 个 ARIS 入口及五个本地阶段入口，无诊断，五个 K-Dense 入口退出发现，停用 vendor 已移除。
+- 两个新 workflow 通过真实 Pi 解析/执行路径验证；研究审计使用原生宿主 session 工厂，不加载第二份扩展。
 
-- 仓库内原生 ESM 适配入口，继续使用固定版本 pi-dynamic-workflows 3.14.0，不修改全局插件。
-- 按角色检查最终活动工具集合，Reviewer 仅允许 read/grep/find/ls，排除默认执行、写入和共享存储工具；补齐 SDK 基础集合缺失的只读工具。
-- 审查报告、实际工具调用和会话凭据自动捕获；record-review 必须提供凭据，check-run 重新核验哈希、模型、commit 和完成状态。支持重新审查前撤销未执行的 PASS。
-- RUNNING 状态、原子状态写入、实时 stdout/stderr、独占运行锁、不覆盖旧日志、信号转发和显式中断恢复。
-- 通用状态机、真实 SDK 和离线合成传输集成测试，以及数据路径冒烟检查要求；不包含具体研究模型的 Python 测试。
-- Captain/Worker/Runner 为 DeepSeek Flash / low；Reviewer 为用户明确选择的 DeepSeek V4 Pro / high。请求和实际 thinking 不一致时拒绝静默继续。
+## 基线与 SDK fixture 修复
 
-## 验证状态
+修改前在获准的离线环境运行 `node --test --test-reporter=tap tests/*.test.mjs`，31 项中 29 项通过、2 项失败，与历史记录一致。
 
-修复内容从清理前的会话补丁恢复。前次部分版本曾通过 25 项 Node 测试，但最后的适配调整尚未完成回归，不能将旧结果当作当前全部修复已通过验证的证据。
+根因位于测试 fixture：合成 provider 仍访问旧 `context.tools`，当前 SDK 将工具声明放在 transcript system delta；改用 `ai.getCurrentTools(context.messages)`。SDK 生成的 auth/model stores 原先进入临时仓库代码 diff，现移到忽略的 outputs/。未放宽生产环境的干净工作区、模型、工具或凭据校验。
 
-本次恢复后的测试命令被拒绝执行，未重试，也未调用付费模型。当前仅核对文件恢复范围、配置及空白研究状态。
+修复后该文件三项真实 SDK 合成传输测试在获准环境通过。受控运行完成测试也曾在临时合成项目通过；随后补充的输入变化断言，在最终环境下因 Git fixture 权限限制未重新完成。
 
-后续获准时可运行 `node --test tests/*.test.mjs`。该套件仅使用临时项目、实际 SDK 和进程内合成响应，不调用远程模型。`tests/manual/pi-workflow-smoke.mjs` 会调用付费 DeepSeek API，属于另行显式启动的可选检查；旧日志已清理。
+## 独立检查与修复
 
-会话凭据用于可信参与者的审计，不是操作系统沙箱或抵御恶意仓库写入者的密码学证明。
+未适配基线为只读场景分析，未实际启动上游命令；不把它记为发生过的科研失败。随后由独立上下文对本地入口和临时材料执行 forward-test，并由另一独立上下文审查实现，未调用付费模型。
 
-## 2026-10-31 中文化回归
+已修复的实质问题：
 
-系统提示、角色、Skill、交互提示和模板中文化后，运行 `node --test tests/*.test.mjs`：30 项中 28 项通过、2 项失败。新增的中文方案完整性和中文待填写结果检查均通过；人工审批三分支、无界面中止、只读工具策略、模型独立性和运行关卡检查通过。未调用远程或付费模型，因此此次检查不代表已验证真实模型的中文输出遵从性。
+1. 原实现只核验成功 read 的路径；现在依据 offset/limit、工具截断元数据和实际返回文本合并逐文件行覆盖，未读完不可验证。部分读取拒绝、完整分页接受的回归已通过。
+2. 子评审原先只复用初始输入；现在必须先保存本轮完整候选/方案 RESULT.md，并将它和原始输入一起绑定哈希。候选变化导致子审计失效的回归已通过。
+3. kill-argument 原先允许裁决员自评总 verdict；现在攻击槽保留 memo，裁决槽提交逐点分类与 counts，由宿主按固定上游表格计算。未解决 critical 问题不能自填 PASS，计数不一致被拒绝，五类映射回归已通过。
+4. 受控任务完成校验原先提前返回；现在保留全部执行输入及实现阶段科研背景的哈希绑定。实现允许修改的源码与必须保持的执行输入分开处理；本项最终动态回归受下述 Git 权限限制。
 
-修改前的基线为 28 项中 26 项通过，同样有以下两项失败，未在本次翻译中修改其实现或断言：
+独立审查另建议导入脚本拒绝脏源 checkout，已加入检查；最终下载源为干净状态。未留下已知待处理的审查建议，但不能把受限测试记为通过。
 
-- `tests/pi-evidence.test.mjs` 的离线传输审查凭据测试：workflow 返回 null，日志为 `Cannot read properties of undefined (reading 'map')`。
-- 同文件的 SDK 失败凭据测试：预期匹配 `review evidence`，实际在更早的关卡收到 `implementation commit changed or working tree dirty`。
+## 最终验证
 
-测试使用临时合成项目；真实项目仍为 IDLE，没有创建或执行科研实验。初次受限运行因沙箱阻止 Git 子进程（EPERM）未完成，以上结果来自获准后重新运行的离线套件。
+最终在沙箱内运行：
 
-## 2026-10-31 科研 Skill 接入回归
+```bash
+node --test --test-isolation=none --test-reporter=tap --test-reporter-destination=outputs/aris-validation/final.tap tests/*.test.mjs
+```
 
-从 K-Dense Scientific Agent Skills 的固定 commit `5f2bc0341354fd5590aef76a533ada1e1e5b4e62` 选择五个通用 Skill，以项目阶段适配层接入；源文件和配套资料在 `.pi/vendor/scientific-agent-skills/`，项目入口在 `.pi/skills/`。只修改提示与项目研究方向，不更改状态脚本、审批脚本、审查脚本或角色工具策略。真实任务尚未配置，不执行上游脚本、安装统计依赖或启动正式实验。
+60 项：36 项通过，24 项在临时 Git fixture 初始化时被 `spawnSync git EPERM` 阻断；逐项错误原因均为同一权限错误，未跳过或删除这些测试。该次临时日志已按文件整理要求删除，此处保留验证摘要；不能宣称完整套件通过。
 
-离线命令 `node --test tests/*.test.mjs` 结果为 31 项中 29 项通过、2 项失败。新增的 Pi Skill 发现测试通过：五个原有阶段 Skill 和五个新增适配层被发现，无诊断；上游资料目录未被当作自动加载 Skill。方案审批三分支、只读审查工具与运行状态关卡测试通过。失败仍是上节记录的两项 `tests/pi-evidence.test.mjs`，错误内容未变；因此不能宣称完整审查凭据链路已通过回归。未调用付费模型，中文输出与方法质量尚未在真实模型上验证。
+通过项包含实际 Pi 发现、审批三分支和无界面中止、真实 SDK 研究审计、模型/thinking/工具约束、攻击与裁决独立 session、输入/报告/事件变化拒绝、部分读取与完整分页、子评审候选绑定、确定性 verdict 和解码能力缺失处理。无 Git fixture 的入口与阶段检查另有六项通过。
+
+审查代理申请沙箱外重跑测试时收到 `Rejected("rejected by user")`，此后没有再次申请或执行被拒绝的提权动作。最终检查在沙箱内完成，未宣称完整套件通过。`git diff --check` 和本地新增 Node 模块语法检查通过。
+
+## 本地模型与能力边界
+
+Captain/Worker/Runner 为 DeepSeek Flash/low；代码 Reviewer 和独立研究 Auditor 为 Pro/high。研究审计保留实质 verdict 与原始 details，另记 same-family/provisional、本地授权差异及 upstreamAcceptanceSatisfied=false。审计响应模型来源为 SDK 消息，执行者模型来源为项目配置，不冒称独立服务端认证。研究审计不授权代码运行。
+
+默认外部来源未配置、不自动探测；两项引用审计所需独立联网、诚信取证外部运行时及 PDF/图像独立解码不可用时 blocked。五个队列/平台/剖析入口只输出待审批规划。未运行 GPU、云部署、上游 helper、通知或真实科研实验；未验证付费模型中文遵从性或研究方法质量。
+
+当前未配置真实科研问题、数据集或运行命令，STATE 保持 IDLE；没有创建科研实验。
+
+## 文件整理范围
+
+只保留 Pi 配置、四种角色、四个 workflow、42 个项目 Skill、ARIS 必需原文和依赖、状态/审计脚本、自动及手动测试、操作与验证文档，以及 `.research/` 运行时记忆模板。
+
+移除停用 K-Dense vendor、未启用的 compact 配置、实施过程计划和临时日志，以及 ARIS 中未接入的其他宿主安装/自更新、专利、制图、Overleaf、自改 Skill 和第二套记忆资源。`.pi/npm/` 是现有 workflow 所需本地依赖，继续保留且被 Git 忽略。
+
+清理后再次核验：103 个上游文件与固定来源的字节及 SHA256 一致，37 个 ARIS 入口和五个本地阶段入口完整，packaged 依赖和本地 Markdown 链接均有效。30 项无 Git 的 SDK/审计/发现测试和六项转接器测试通过；未重跑已受限的 Git fixture，也未再次申请沙箱外执行。导入脚本语法与 `git diff --check` 通过。

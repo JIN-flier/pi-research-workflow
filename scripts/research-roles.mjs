@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-export const ROLE_NAMES = ['implementation-worker', 'independent-code-reviewer', 'experiment-runner'];
+export const ROLE_NAMES = ['implementation-worker', 'independent-code-reviewer', 'experiment-runner', 'independent-research-auditor'];
 export function rolePolicy(root, role) {
   if (!ROLE_NAMES.includes(role)) throw new Error(`unknown research role: ${role}`);
   const source = readFileSync(join(root, '.pi/agents', `${role}.md`), 'utf8');

@@ -2,6 +2,8 @@
 
 `../STATE.md` 是恢复入口。状态脚本为 `scripts/research-workflow.mjs`；状态转换统一使用其命令。Pi 审批脚本为 `.pi/workflows/plan-review.workflow.js`，必须以前台方式运行。
 
+ARIS 的 37 个方法入口通过 `.pi/aris/manifest.json` 和 `scripts/aris-adapter.mjs` 接入，操作见 [ARIS.md](ARIS.md)。先 prepare，再按结构化角色和能力交接，完成后 verify。研究审计使用新鲜的 `independent-research-auditor`、`research-audit.workflow.js` 和独立凭据；不写代码审查凭据、不推进实验状态。仍沿用 DeepSeek Flash/low、Pro/high，研究审计如实标记 same-family/provisional。
+
 ## 日常命令参考
 
 在项目根目录运行 `node scripts/research-workflow.mjs COMMAND`。日常操作查阅本参考，不必读取状态脚本实现。
@@ -26,7 +28,7 @@ API 详情查阅已安装的 workflow-authoring Skill。只有具体错误无法
 
 ## 中文输出与协议兼容
 
-`.pi/APPEND_SYSTEM.md` 约束总协调者使用简体中文；三个代理的角色提示、五个科研 Skill、审批提示和审查工作流也明确要求中文正文。引用原文、必要术语和原始日志可保留原语言，配中文说明，不得改写原始证据。
+`.pi/APPEND_SYSTEM.md` 约束总协调者使用简体中文；四个代理的角色提示、本地阶段及 ARIS 适配入口、审批提示和审查工作流也明确要求中文正文。引用原文、必要术语和原始日志可保留原语言，配中文说明，不得改写原始证据。
 
 文件名、路径、命令、JSON/YAML 字段名、模型 ID、哈希、状态与决策枚举、`Research role:` 标记及审查报告的固定英文字段标签保持原样。审查报告的前四行仍为 `Verdict:`、`Experiment:`、`Reviewed commit:`、`Reviewer model:`，后三项 `Findings:`、`Evidence:`、`Required changes:` 的说明正文使用中文。不得在前四个值后追加中文注释。
 

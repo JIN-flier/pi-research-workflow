@@ -12,7 +12,7 @@ description: 依据已记录证据，判断研究方向应继续、修改、放�
 
 ## 步骤
 1. 将结果与预先登记的预测及替代解释进行比较。
-2. 结论存在方法或推断争议时按需调用 `scientific-critical-thinking`，核对证据强度和竞争性解释；不得据此改变已记录结果。
+2. 结论存在方法或推断争议时按需调用 `aris-research-review` 或 `aris-result-to-claim`，使用独立审计证据核对主张与竞争解释；不得据此改变已记录结果。同家族审计的 provisional 不得写为 ARIS 跨家族 accepted。
 3. 选择 CONTINUE、REVISE、ABANDON 或 INCONCLUSIVE，解释理由及何种证据会改变该选择。
 4. 更新实验的 `DECISION.md`、项目的 `DECISIONS.md`、`HYPOTHESES.md` 和 `STATE.md`，记录下一步行动。
 

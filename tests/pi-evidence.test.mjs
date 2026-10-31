@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadPiRuntime } from './helpers/pi-runtime.mjs';
@@ -13,18 +13,24 @@ const project = fileURLToPath(new URL('..', import.meta.url));
 const { sdk, ai, WorkflowAgent, runWorkflow, loadAgentRegistry, installHostCreateAgentSession } = await loadPiRuntime(project);
 
 async function exercise({ thinking = 'high', fail = false } = {}) {
-  const root = implementation(undefined, root => writeFileSync(join(root, '.pi/agents/independent-code-reviewer.md'), readFileSync(join(project, '.pi/agents/independent-code-reviewer.md'))));
+  const root = implementation(undefined, root => {
+    writeFileSync(join(root, '.pi/agents/independent-code-reviewer.md'), readFileSync(join(project, '.pi/agents/independent-code-reviewer.md')));
+    // SDK runtime stores are generated evidence, not implementation changes.
+    writeFileSync(join(root, '.gitignore'), 'outputs/\n');
+  });
   const snapshot = state(root), declaredToolSets = [];
   let requests = 0;
   // The transport is an in-process synthetic provider. No internet, credentials,
   // real model, or paid API is used; SDK/tool execution/workflow/capture are real.
-  const runtime = await sdk.ModelRuntime.create({ authPath: join(root, 'fixture-auth.json'), modelsPath: null, modelsStorePath: join(root, 'fixture-models.json'), refreshOnCreate: false, allowModelNetwork: false });
+  mkdirSync(join(root, 'outputs'), { recursive: true });
+  const runtime = await sdk.ModelRuntime.create({ authPath: join(root, 'outputs/fixture-auth.json'), modelsPath: null, modelsStorePath: join(root, 'outputs/fixture-models.json'), refreshOnCreate: false, allowModelNetwork: false });
   const report = `Verdict: PASS\nExperiment: EXP-0001\nReviewed commit: ${snapshot.implementation_commit}\nReviewer model: deepseek/deepseek-v4-pro\nFindings: None\nEvidence: synthetic provider read the fixture file\nRequired changes: None`;
   runtime.registerProvider('deepseek', {
     api: 'openai-completions', apiKey: 'synthetic-test-only', baseUrl: 'https://no-network.invalid',
     models: [{ id: 'deepseek-v4-pro', name: 'Synthetic DeepSeek fixture', reasoning: true, input: ['text'], contextWindow: 32000, maxTokens: 2000, cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }, thinkingLevelMap: { low: null, high: 'high', max: 'max' } }],
     streamSimple(model, context) {
-      declaredToolSets.push(context.tools.map(t => t.name).sort());
+      // Pi's provider contract carries tool declarations in system transcript deltas.
+      declaredToolSets.push(ai.getCurrentTools(context.messages).map(t => t.name).sort());
       const first = requests++ === 0;
       const content = fail ? [] : first ? [{ type: 'toolCall', id: 'fixture-read', name: 'read', arguments: { path: join(root, 'experiment.py') } }] : [{ type: 'text', text: report }];
       const stopReason = fail ? 'error' : first ? 'toolUse' : 'stop';
