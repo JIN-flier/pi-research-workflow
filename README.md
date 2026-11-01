@@ -4,6 +4,12 @@
 
 本指南使用 Linux/macOS 的 Bash 命令；Windows 用户可在 WSL 中使用同一流程。命令块在终端执行，标为“对话模板”的文本粘贴到交互式 Pi。模板中的 `〈…〉` 必须替换为真实信息；不得把示例内容当作真实实验或审批结果。
 
+## 当前状态与最短使用路径
+
+`.research/STATE.md` 当前为 `IDLE`，`.research/PROJECT.md` 仍缺科学问题、数据、基线、指标、资源与风险。先完成项目配置，再调查文献、形成一项可证伪假设；有真实方案和 `RUN.json` 命令后才用 `new` 创建实验。每轮依次经过人工方案审批、受控实现、准确 commit 的独立代码审查、`check-run`/`run`、结果分析与决策。ARIS 方法在各阶段通过 `prepare`、对应角色或 workflow、`verify` 接入，不改变这些关卡。
+
+若只想检查安装而不创建实验，可运行 `node scripts/research-workflow.mjs status`、`node scripts/aris-adapter.mjs verify-vendor` 和第 3 节的离线测试。详细状态命令见[命令参考](.research/workflow/README.md)，37 个入口及可用阶段见 [ARIS 操作指南](.research/workflow/ARIS.md)。
+
 ## 使用路线
 
 1. [安装 Pi、获取仓库](#1-安装-pi获取仓库)
@@ -119,6 +125,27 @@ Pi 入口统一使用 `/skill:aris-<name>`。五个本地阶段 Skill 继续负�
 
 沿用 DeepSeek Flash/low、Pro/high。研究审计记录 `same-family / provisional` 及本地授权差异，保留负面结论；不能声称满足 ARIS 跨家族接受要求。研究审计凭据不用于 `record-review`，本地代码关卡继续使用原策略。
 
+一次 ARIS 调用的实际顺序如下；`〈…〉` 和 `UUID` 仅表示运行时真实值，不能原样提交。请求文件须位于项目内，`inputPaths` 指向已有文件，`experimentId` 仅在当前实验存在且与 STATE.md 一致时填写；`sources` 只能声明 `.pi/aris/config.json` 中已配置且实际可访问的来源。
+
+```json
+{
+  "arguments": "〈本次具体研究任务〉",
+  "inputPaths": [".research/literature/〈已保存的文献材料.md〉"],
+  "sources": []
+}
+```
+
+将占位路径换成项目内现存的文献材料，把请求保存为 `.research/aris-request.json`，然后在项目根目录运行：
+
+```bash
+node scripts/aris-adapter.mjs inspect aris-research-lit
+node scripts/aris-adapter.mjs prepare aris-research-lit --request .research/aris-request.json
+```
+
+从返回 JSON 读取 `status` 和 `invocationPath`。只有 `prepared` 才按 `role`、`upstreamPath` 和 `workflow` 继续；`needs_configuration`、`blocked`、`handoff` 分别表示缺研究配置、缺必要能力、仅可规划。Captain 方法将结果写入返回的 `outputDirectory/RESULT.md`，再运行 `node scripts/aris-adapter.mjs verify 〈invocationPath〉`。Worker/Runner 需运行第 7、8 节的受控 workflow；研究审计需运行下面的独立审计 workflow。每次调用的请求、版本、输入哈希与产物保存在 `.research/aris/<UUID>/`；输入、阶段或上游版本变化后重新 prepare，不覆盖旧调用。
+
+审计类入口要求 `inputPaths` 中有真实原始文件。`prepare` 返回 `prepared` 后，使用 `workflow` 工具以前台方式运行完整 `.pi/workflows/research-audit.workflow.js`，传入 `{ "invocationPath": "〈真实 invocationPath〉" }`；`aris-kill-argument` 另传 `"attack": true`。审计员为全新 Pro/high 会话，只能用 `read`、`grep`、`find`、`ls`；宿主在调用目录保存报告、事件和凭据。之后运行 `verify 〈invocationPath〉`，研究判断及 `same-family / provisional` 差异一并保留。Captain 的方法若需要独立评审槽位，先完成父调用 `RESULT.md`，再执行 `node scripts/aris-adapter.mjs prepare-audit 〈父 invocationPath〉`，对返回的新调用运行审计 workflow 与 verify。准确参数与限制见 [ARIS 操作指南](.research/workflow/ARIS.md)。
+
 ### 2.4 配置 API 凭据
 
 当前角色使用 DeepSeek。可以在 Pi 中运行 `/login` 选择 DeepSeek 保存凭据，也可在启动 Pi 的终端设置 `DEEPSEEK_API_KEY`。Bash 中可用隐藏输入避免将密钥字面量写进命令历史：
@@ -147,7 +174,7 @@ pi --list-models deepseek
 | Auditor，独立研究审计 | `.pi/agents/independent-research-auditor.md` | `deepseek/deepseek-v4-pro` | `high` |
 | Runner，执行 | `.pi/agents/experiment-runner.md` | `deepseek/deepseek-flash` | `low` |
 
-Reviewer 的 `high` 是用户在 SDK 能力检查后明确选择的配置，V4 Pro 不支持 `low`，不得静默降级或把实际 high 标为 low。更换角色模型时，不仅要改主会话 `/model`，还要同步角色定义和 `code-review.workflow.js` 中的显式模型/thinking，并重新验证兼容性。
+Reviewer 的 `high` 是用户在 SDK 能力检查后明确选择的配置，V4 Pro 不支持 `low`，不得静默降级或把实际 high 标为 low。更换角色模型时，不仅要改主会话 `/model`，还要同步角色定义、`code-review.workflow.js`、`research-audit.workflow.js`、`aris-dispatch.workflow.js` 和转接器模型策略，并重新验证兼容性。
 
 Worker 与 Reviewer 必须为不同具体模型。当前允许同一厂商的不同模型，这是 2026-10-30 经用户授权的调整，比跨厂商模型家族隔离更弱；以独立上下文、只读工具、准确 commit 审查和人工审批补偿。仅更换大小写、路由前缀或 thinking 后缀不算不同模型。Reviewer 不可用时应保持待审，不得用 Worker 冒充。
 
@@ -186,7 +213,7 @@ pi -a
 node --test tests/*.test.mjs
 ```
 
-**验证边界：**ARIS 接入包含真实 Pi SDK 和进程内合成传输的离线测试。此前两项 SDK 凭据 fixture 失败已定位：旧工具列表格式不兼容，以及生成缓存被误当成代码改动；具体回归见 [HARDENING.md](.research/workflow/HARDENING.md)。离线通过不代表外部来源、真实 GPU、付费模型中文遵从性或研究方法质量已验证。可选 `node tests/manual/pi-workflow-smoke.mjs` 会调用付费 API，只在另行明确启动时执行。
+**验证边界：**ARIS 接入包含真实 Pi SDK 和进程内合成传输的离线测试。此前两项 SDK 凭据 fixture 失败已定位：旧工具列表格式不兼容，以及生成缓存被误当成代码改动。最近一次完整套件为 60 项中 36 项通过、24 项在临时 Git fixture 初始化时受 `spawnSync git EPERM` 阻断；此后 30 项无 Git 的 SDK/审计/发现检查与六项转接器检查通过。具体证据见 [HARDENING.md](.research/workflow/HARDENING.md)，不能据此宣称完整回归通过。离线检查也不代表外部来源、真实 GPU、付费模型中文遵从性或研究方法质量已验证。可选 `node tests/manual/pi-workflow-smoke.mjs` 会调用付费 API，只在另行明确启动时执行。
 
 ## 4. 填写项目并理解研究现状
 
@@ -363,19 +390,23 @@ background   = false
 **对话模板：启动 Worker**
 
 ```text
-确认当前实验已是 PLAN_APPROVED，再通过 workflow 委派 implementation-worker。
-使用全新上下文，agentType: implementation-worker，
-model: deepseek/deepseek-flash，thinking: low，isolation: false，label: implementation。
-使用包含 export const meta、agent() 和明确返回值的完整脚本；
-仅传递当前实验 ID、批准方案路径、RUN.json、状态及必需代码上下文。
-要求 Worker 复核批准 commit/hash，建立专用分支，完成最小批准变更、测试和提交，
+确认当前实验为 PLAN_APPROVED 或 IMPLEMENTATION_REVISION，且批准方案与 RUN.json 未变。
+按 .pi/aris/ADAPTER.md 为 aris-research-implement-feature 创建请求 JSON，
+填入当前 experimentId、具体实现任务，以及已有 PLAN.md、RUN.json 和必要源文件路径。
+运行 node scripts/aris-adapter.mjs prepare aris-research-implement-feature --request 〈请求文件〉。
+仅在 status 为 prepared 时，读取返回的 invocationPath，
+以前台 workflow 运行完整 .pi/workflows/aris-dispatch.workflow.js，
+args 传入 { "invocationPath": "〈真实路径〉", "role": "implementation-worker" }。
+要求 Worker 复核批准 commit/hash，完成最小批准变更、测试和提交，
 调用 record-implementation deepseek/deepseek-flash，更新 IMPLEMENTATION.md。
 提交前检查真实数据路径，至少各迭代一个训练/验证批次，不优化、不评估测试集。
 缺少真实数据时用确定性样本并记录局限；不将其当作正式实验。
 不得修改批准方案、RUN.json、基线或数据；不得正式评估。报告使用中文。
+任务返回后运行 node scripts/aris-adapter.mjs verify 〈invocationPath〉，
+展示 CODE_REVIEW 状态、实际实现 commit 与验证结果；verify 不等于代码审查 PASS。
 ```
 
-`isolation: false` 让角色在当前项目工作区操作，其专用分支由 Worker 管理，便于状态脚本核验同一 HEAD；不要在未处理合并和重新审查的情况下，把另一个 worktree 的结果当作当前实现。
+ARIS 分派脚本固定使用 `implementation-worker`、DeepSeek Flash/low 和当前工作区；宿主在模型调用前核验准备好的 invocation。Worker 的提交必须处于状态脚本核验的同一 HEAD；不要把另一个 worktree 的结果直接当作当前实现。
 
 Worker 提交后，状态应为 `CODE_REVIEW`。`IMPLEMENTATION.md` 应包含文件、测试、数据路径验证、失败与修复、准确 commit 和局限。只有口头“已完成”而无实现 commit 和登记不够。
 
@@ -438,15 +469,23 @@ READY_TO_RUN 后、执行前需要对原 commit 重新审查时，先确认 HEAD
 
 ```text
 请确认当前实验 READY_TO_RUN，当前准确 commit 有有效 PASS 凭据。
-通过 workflow 使用全新 experiment-runner，model: deepseek/deepseek-flash，
-thinking: low，isolation: false，label: experiment-run。
-传入 STATE.md、批准方案、RUN.json、审查报告/凭据及数据环境准备证据。
+按 .pi/aris/ADAPTER.md 为 aris-run-experiment 创建请求 JSON，
+填入当前 experimentId、已批准的运行目的，inputPaths 包含现存 RUN.json、
+审查凭据及实际需要核验的环境证据；不要填入新的底层运行命令。
+运行 node scripts/aris-adapter.mjs prepare aris-run-experiment --request 〈请求文件〉。
+仅在 status 为 prepared 时，以前台 workflow 运行完整
+.pi/workflows/aris-dispatch.workflow.js，args 传入
+{ "invocationPath": "〈真实路径〉", "role": "experiment-runner" }。
 要求先调用 node scripts/research-workflow.mjs check-run，
 成功后再以另一独立 bash 工具调用 node scripts/research-workflow.mjs run。
 不得直接执行 RUN.json 的底层命令，不得追加 echo、管道或成功兜底。
 只运行本轮一次，不修改代码、方案、环境配置或 RUN.json。
 报告真实执行 commit、退出码/信号、日志路径和失败信息，使用中文。
+任务返回后运行 node scripts/aris-adapter.mjs verify 〈invocationPath〉，
+保留 ANALYSIS 或 EXECUTION_FAILED 的真实状态；verify 不代表科学结论成立。
 ```
+
+ARIS 分派脚本固定使用 `experiment-runner` 和 DeepSeek Flash/low。宿主在模型调用前核验阶段、输入、审查凭据与角色；正式命令仍只由 `research-workflow.mjs run` 执行。
 
 运行期间 STATE.md 显示 `RUNNING`，日志实时写入：
 
@@ -476,8 +515,11 @@ tail -f outputs/EXP-0001/stdout.log
 ```text
 核验当前实验的退出状态、执行 commit、数据来源、原始输出及批准方案。
 依据预先声明的指标重新计算或核验结果，与基线和证伪标准比较。
-按需调用 /skill:aris-analyze-results 整理真实结果，核对已批准统计假设、效应量与不确定性；
-再用独立 /skill:aris-experiment-audit 和 /skill:aris-result-to-claim 检查真实性与主张。
+按转接契约 prepare /skill:aris-analyze-results，inputPaths 指向真实原始输出，
+完成 RESULT.md 后 verify；核对已批准统计假设、效应量与不确定性。
+再分别 prepare /skill:aris-experiment-audit 和 /skill:aris-result-to-claim，
+让各自的独立 research-audit workflow 直接读取原始输入，完成后分别 verify。
+保留各审计的原始判断及 same-family / provisional 记录，不将其当作代码 PASS。
 分析方差、混杂、泄漏、偏离方案和失败案例，在 RESULTS.md 中给出中文分析，
 保留命令、输出路径、不确定性、局限与证据引用；替换待填写内容。
 不得改指标、排除失败运行，或仅凭退出码宣称研究成功。
@@ -542,6 +584,8 @@ RUNNING 时只监控已有进程，不再次运行；待审时恢复真实审批
 | --- | --- |
 | 启动提示找不到 workflow 模块 | 检查根目录及 `.pi/npm/` 安装，执行上面的固定版本安装命令 |
 | 找不到 `/workflows` 或 `/research-plan-review` | 检查项目是否受信任、工作目录、扩展/提示是否被禁用，`/reload` 或重启 |
+| ARIS prepare 返回 `needs_configuration`、`blocked` 或 `handoff` | 查看返回的 `reasons`、`missingCapabilities` 和 `inspect` 结果；补真实项目资料或宿主能力。`handoff` 仅用于待审批规划，不能直接执行 |
+| ARIS verify 提示输入、状态、上游版本或证据变化 | 保留旧调用与产物，核对变化来源后重新 prepare；审计凭据不得手工补造，过期调用不能继续分派 |
 | 请求/实际 thinking 不一致 | 对照角色配置和模型能力排查，不静默改标记 |
 | 方案或 RUN.json 改变 | 不执行；改方案必须重新提交并人工审批，活动状态不支持回退时交人工处理 |
 | CODE_REVIEW/READY_TO_RUN 下实现 commit 改变或工作区脏 | 保留变更并交人工处理；这两个状态不能直接 record-implementation，reopen-review 也要求原 commit 未变且代码干净。不得手改状态或删除文件强行通过 |
@@ -587,9 +631,11 @@ RUNNING 时只监控已有进程，不再次运行；待审时恢复真实审批
 | --- | --- | --- |
 | 全局中文输出与协调规则 | `AGENTS.md`、`.pi/APPEND_SYSTEM.md` | 不冲突、不弱化审批和审查 |
 | 某阶段的科研方法 | `.pi/skills/对应阶段/SKILL.md` | 输入、步骤、输出、边界和完成标准仍完整 |
+| ARIS 入口或上游方法 | `.pi/skills/aris-*/`、`.pi/aris/`、`scripts/vendor-aris.mjs` | 固定来源、manifest 哈希、阶段/能力映射及未支持依赖；原文更新需重新审核，不只改 commit |
 | 角色模型或工具 | `.pi/agents/` | 角色标记、模型独立性、实际 thinking 与最终工具集合 |
 | 人工审批提示 | `.pi/prompts/`、`plan-review.workflow.js` | 前台、明确回答、无回答中止、版本绑定 |
 | 独立审查编排 | `code-review.workflow.js`、SDK 适配层 | 准确 commit、全新上下文、只读工具、自动凭据 |
+| ARIS 受控分派与研究审计 | `aris-dispatch.workflow.js`、`research-audit.workflow.js`、`scripts/aris-adapter.mjs`、`scripts/aris-audit-evidence.mjs` | prepare/verify、阶段关卡、输入哈希、独立报告及 same-family/provisional 差异 |
 | 新实验生成模板 | `scripts/research-workflow.mjs` 的模板内容 | 空方案不通过、Pending. 仍拦截未分析结果 |
 
 **对话模板：维护工作流**
@@ -617,6 +663,8 @@ RUNNING 时只监控已有进程，不再次运行；待审时恢复真实审批
 | --- | --- |
 | `.research/PROJECT.md` | 科学问题与项目约束的来源 |
 | `.pi/skills/`、`.pi/aris/`、`.pi/vendor/aris/` | 本地阶段、37 个 ARIS 入口、转接契约、固定上游与依赖 |
+| `.pi/workflows/` | 人工方案审批、独立代码审查、ARIS 受控分派与独立研究审计 |
+| `scripts/aris-adapter.mjs`、`scripts/aris-audit-evidence.mjs` | ARIS 请求准备、能力与阶段校验、独立研究审计凭据核验 |
 | `.research/STATE.md` | 状态恢复入口，状态转换使用脚本，不手改绕关 |
 | `.research/DECISIONS.md`、`HYPOTHESES.md` | 跨轮次决策与假设记忆 |
 | `.research/literature/`、`failures/`、`reviews/` | 文献、失败和审查记录 |
